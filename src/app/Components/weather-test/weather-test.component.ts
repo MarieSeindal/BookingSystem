@@ -1,27 +1,27 @@
-import { Component } from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {WeatherTestService} from './weather-test.service';
 import {Weather} from './weather';
+import {Observable, of} from 'rxjs';
 
 @Component({
   selector: 'weather-test',
   templateUrl: './weather-test.component.html',
-  styleUrls: ['./weather-test.component.css']
+  styleUrls: ['./weather-test.component.css'],
+  imports: [CommonModule],
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WeatherTestComponent {
 
-  weather: Weather[] = [];
+  weather: Observable<Weather[]> = of([]);
 
   constructor(
     private weatherService: WeatherTestService,
   ) {}
 
   ngOnInit() {
-    this.getWeather();
-  }
-
-  getWeather(): void {
-    this.weatherService.getWeather()
-      .subscribe(weather => (this.weather = weather));
+    this.weather = this.weatherService.getWeather();
   }
 
 }

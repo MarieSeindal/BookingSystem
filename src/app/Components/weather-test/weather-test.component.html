@@ -1,1 +1,13 @@
 <p>weather-test works!</p>
+
+<div *ngIf="weather|async as weath">
+  <div *ngFor="let a of weath">
+
+    <pre>
+      {{a|json}}
+    </pre>
+
+  </div>
+</div>
+
+test

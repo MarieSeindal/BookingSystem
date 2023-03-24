@@ -13,9 +13,9 @@ const httpOptions = {
   })
 };
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class WeatherTestService {
-  weatherURL = 'localhost:7143/WeatherForecast';
+  weatherURL = 'https://localhost:7041/weatherforecast';
 
   constructor(
     private http: HttpClient

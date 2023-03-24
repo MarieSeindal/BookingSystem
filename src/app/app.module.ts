@@ -8,11 +8,11 @@ import { WeatherTestComponent } from './Components/weather-test/weather-test.com
 @NgModule({
   declarations: [
     AppComponent,
-    WeatherTestComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    WeatherTestComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
