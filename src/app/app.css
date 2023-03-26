@@ -7,6 +7,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+flex {
+  display: flex;
+}
+
 h1,
 h2,
 h3,
