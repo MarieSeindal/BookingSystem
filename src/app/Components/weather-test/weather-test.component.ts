@@ -7,7 +7,7 @@ import {Observable, of} from 'rxjs';
 @Component({
   selector: 'weather-test',
   templateUrl: './weather-test.component.html',
-  styleUrls: ['./weather-test.component.css'],
+  styleUrls: ['./weather-test.component.scss'],
   imports: [CommonModule],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush
