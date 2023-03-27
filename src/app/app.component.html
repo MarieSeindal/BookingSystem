@@ -1,7 +1,18 @@
 
 <!--Nav bar -->
-<div id="navbar" style="margin-right: auto">
-  NavBar
+<mat-toolbar class="" style="background-color: #8DC63F">
+  <i style="margin: 5px" routerLink="">Home</i>
+  <button style="margin: 5px" routerLink="weather">Random Vejr</button>
+  <button style="margin: 5px" routerLink="calendar">Kalender</button>
+  <button style="margin: 5px" routerLink="booking">Booking</button>
+  <button style="margin: 5px" routerLink="ng-tutorial">Angular Tutorial</button>
+  <button style="margin: 5px" routerLink="documentation">Dokumentation</button>
+</mat-toolbar>
+<div>
+  <div>
+
+  </div>
+  <router-outlet><!--When making routes, they will load after this tag--></router-outlet>
+
 </div>
-<router-outlet><!--When making routes, they will load after this tag--></router-outlet>
 
