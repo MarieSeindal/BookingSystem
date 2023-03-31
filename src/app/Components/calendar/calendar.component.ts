@@ -31,7 +31,7 @@ export class CalendarComponent implements OnInit{
     let monthDays = [];
 
     for (let i = 0; i < days; i++) {
-      monthDays.push(i)
+      monthDays.push(i+1)
     }
 
     return monthDays;

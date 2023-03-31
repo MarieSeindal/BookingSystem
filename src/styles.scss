@@ -1,4 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'theme.scss';
+
 body{
-  margin: 0px;
+  margin: 0;
+}
+
+.dalux-green{
+  background-color: #8DC63F
+}
+
+.T-blocks{
+  background-color: #1976d2;
+  height: 30px;
+  width: 100px;
 }

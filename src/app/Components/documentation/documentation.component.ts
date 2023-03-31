@@ -4,7 +4,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 @Component({
-  selector: 'app-documentation',
+  selector: 'documentation',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './documentation.component.html',

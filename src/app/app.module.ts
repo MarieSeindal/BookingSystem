@@ -11,31 +11,39 @@ import {DocumentationComponent} from './Components/documentation/documentation.c
 import {HomeComponent} from './Components/home/home.component';
 import {NotFoundComponent} from './Components/not-found/not-found.component';
 import {CalendarPageComponent} from './Pages/calendar-page/calendar-page.component';
+import {MatIconModule, MatIconRegistry} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
     AppComponent,
     NgTutorial,
   ],
-	imports: [
-		BrowserModule,
-		HttpClientModule,
-		WeatherTestComponent,
-		RouterOutlet,
-		RouterModule.forRoot([ //most specific routes on top
-			{path: '', component: HomeComponent}, //Default page or home page
-			// {path: 'calendar/:userId', component: CalendarComponent},
-			{path: 'calendar', component: CalendarPageComponent},
-			// {path: 'booking/:userId', component: BookingComponent},
-			{path: 'booking', component: BookingComponent},
-			{path: 'weather', component: WeatherTestComponent},
-			{path: 'ng-tutorial', component: NgTutorial},
-			{path: 'documentation', component: DocumentationComponent},
-			{path: '**', component: NotFoundComponent}, // for any other not defined paths user may enter.
-		]),
-		MatToolbarModule,
-	],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    WeatherTestComponent,
+    RouterOutlet,
+    RouterModule.forRoot([ //most specific routes on top
+      {path: '', component: HomeComponent}, //Default page or home page
+      // {path: 'calendar/:userId', component: CalendarComponent},
+      {path: 'calendar', component: CalendarPageComponent},
+      // {path: 'booking/:userId', component: BookingComponent},
+      {path: 'booking', component: BookingComponent},
+      {path: 'weather', component: WeatherTestComponent},
+      {path: 'ng-tutorial', component: NgTutorial},
+      {path: 'documentation', component: DocumentationComponent},
+      {path: '**', component: NotFoundComponent}, // for any other not defined paths user may enter.
+    ]),
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(iconRegistry: MatIconRegistry) {
+    iconRegistry.setDefaultFontSetClass('material-symbols-rounded');
+  }
+}

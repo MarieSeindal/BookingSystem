@@ -1,14 +1,22 @@
 
 <!--Nav bar -->
-<mat-toolbar class="" style="background-color: #8DC63F">
-  <i style="margin: 5px" routerLink="">Home</i>
-  <button style="margin: 5px" routerLink="weather">Random Vejr</button>
+<mat-toolbar color="primary">
+  <mat-icon routerLink="">home</mat-icon>
+<!--  <button mat-icon-button>needs a mat icon in here</button>-->
+
+  <button mat-icon-button>
+    <mat-icon routerLink="">home</mat-icon>
+  </button>
+
+  <button mat-button style="margin: 5px" routerLink="weather">   <mat-icon routerLink="">add</mat-icon>
+     Random Vejr</button>
   <button style="margin: 5px" routerLink="calendar">Kalender</button>
   <button style="margin: 5px" routerLink="booking">Booking</button>
   <button style="margin: 5px" routerLink="ng-tutorial">Angular Tutorial</button>
   <button style="margin: 5px" routerLink="documentation">Dokumentation</button>
 </mat-toolbar>
-<div style="margin: 20px">
+
+<div style="margin: 0px">
   <router-outlet><!--When making routes, they will load after this tag--></router-outlet>
 </div>
 
