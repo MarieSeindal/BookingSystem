@@ -5,12 +5,12 @@ import {AppComponent} from './app.component';
 import {WeatherTestComponent} from './Components/weather-test/weather-test.component';
 import {NgTutorial} from "./Components/ng-tutorial/ng-tutorial";
 import {RouterModule, RouterOutlet} from "@angular/router";
-import {CalendarComponent} from "./Components/calendar/calendar.component";
 import {BookingComponent} from "./Components/booking/booking.component";
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {DocumentationComponent} from './Components/documentation/documentation.component';
 import {HomeComponent} from './Components/home/home.component';
 import {NotFoundComponent} from './Components/not-found/not-found.component';
+import {CalendarPageComponent} from './Pages/calendar-page/calendar-page.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,7 @@ import {NotFoundComponent} from './Components/not-found/not-found.component';
 		RouterModule.forRoot([ //most specific routes on top
 			{path: '', component: HomeComponent}, //Default page or home page
 			// {path: 'calendar/:userId', component: CalendarComponent},
-			{path: 'calendar', component: CalendarComponent},
+			{path: 'calendar', component: CalendarPageComponent},
 			// {path: 'booking/:userId', component: BookingComponent},
 			{path: 'booking', component: BookingComponent},
 			{path: 'weather', component: WeatherTestComponent},
