@@ -1,1 +1,41 @@
-<p>booking works!</p>
+<div class="d-flex flex-column">
+
+  <!-- Title -->
+
+  <mat-form-field appearance="fill">
+    <mat-label></mat-label>
+    <input matInput>
+  </mat-form-field>
+
+  <!-- Location -->
+  <mat-form-field>
+    <mat-label>Select an option</mat-label>
+    <mat-select>
+      <mat-option>None</mat-option>
+      <mat-option value="option1">Room 1</mat-option>
+      <mat-option value="option2">Room 2</mat-option>
+      <mat-option value="option3">Room 3</mat-option>
+      <mat-option value="option3">Room 4</mat-option>
+      <mat-option value="option3">Hall 1</mat-option>
+      <mat-option value="option3">Hall 2</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Date -->
+
+  <!-- Time / all day -->
+
+  <mat-slide-toggle class="m-3" [color]="'primary'">All day</mat-slide-toggle>
+
+  <!-- Meeting room selection -->
+
+  <!-- Room info from FM -->
+
+  <!-- Description -->
+  <mat-form-field appearance="fill">
+    <mat-label>Textarea</mat-label>
+    <textarea matInput></textarea>
+  </mat-form-field>
+
+
+</div>

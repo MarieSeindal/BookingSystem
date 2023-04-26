@@ -13,6 +13,9 @@ import {NotFoundComponent} from './Components/not-found/not-found.component';
 import {CalendarPageComponent} from './Pages/calendar-page/calendar-page.component';
 import {MatIconModule, MatIconRegistry} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import {BookingPageComponent} from './Pages/booking-page/booking-page.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +24,11 @@ import {MatButtonModule} from '@angular/material/button';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
+    MatButtonModule,
+    MatIconModule,
+    MatToolbarModule,
     WeatherTestComponent,
     RouterOutlet,
     RouterModule.forRoot([ //most specific routes on top
@@ -29,15 +36,12 @@ import {MatButtonModule} from '@angular/material/button';
       // {path: 'calendar/:userId', component: CalendarComponent},
       {path: 'calendar', component: CalendarPageComponent},
       // {path: 'booking/:userId', component: BookingComponent},
-      {path: 'booking', component: BookingComponent},
+      {path: 'booking', component: BookingPageComponent},
       {path: 'weather', component: WeatherTestComponent},
       {path: 'ng-tutorial', component: NgTutorial},
       {path: 'documentation', component: DocumentationComponent},
       {path: '**', component: NotFoundComponent}, // for any other not defined paths user may enter.
     ]),
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
