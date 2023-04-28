@@ -1,11 +1,20 @@
 <div class="d-flex flex-column">
 
-  <form [formGroup]="formGroup" (ngSubmit)="submitBooking(formGroup)" class="d-flex flex-column">
+  <!--
+  NOT USED, For error hint: https://www.educba.com/angular-material-form-validation/
+  NOT USED, more on validation https://angular.io/guide/form-validation
 
+
+  -->
+
+  <form [formGroup]="formGroup" (ngSubmit)="submitBooking(formGroup)" class="d-flex flex-column">
   <!-- Title -->
   <mat-form-field appearance="fill">
     <mat-label>Title</mat-label>
     <input matInput placeholder="Enter title for booking" formControlName="title">
+<!--    <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">-->
+<!--      <mat-icon>close</mat-icon>-->
+<!--    </button>-->
   </mat-form-field>
 
   <!-- Date -->
@@ -15,16 +24,22 @@
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
+      <mat-error>Please choose a date</mat-error>
+
     </mat-form-field>
 
   <!-- Time / all day -->
-    <mat-form-field appearance="fill">
+    <mat-form-field *ngIf="!allDay" appearance="fill">
       <mat-label>Time</mat-label>
-      <input matInput formControlName="time">
+      <input matInput formControlName="time" [disabled]="allDay">
     </mat-form-field>
 
 
-    <mat-slide-toggle class="m-3" [color]="'primary'" [checked]="false" (toggleChange)="switchAllDay()">All day</mat-slide-toggle>
+    <mat-slide-toggle
+      class="m-3"
+      [color]="'primary'"
+      [checked]="false"
+      (toggleChange)="switchAllDay()" >All day</mat-slide-toggle>
 
   <!-- Meeting room selection -->
     <!-- Location -->
@@ -39,6 +54,7 @@
         <mat-option value="Hall 1">Hall 1</mat-option>
         <mat-option value="Hall 2">Hall 2</mat-option>
       </mat-select>
+      <mat-error> Please select a room </mat-error>
     </mat-form-field>
 
     <!-- Room info from FM -->
