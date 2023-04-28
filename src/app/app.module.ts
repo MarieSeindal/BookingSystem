@@ -5,7 +5,6 @@ import {AppComponent} from './app.component';
 import {WeatherTestComponent} from './Components/weather-test/weather-test.component';
 import {NgTutorial} from "./Components/ng-tutorial/ng-tutorial";
 import {RouterModule, RouterOutlet} from "@angular/router";
-import {BookingComponent} from "./Components/booking/booking.component";
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {DocumentationComponent} from './Components/documentation/documentation.component';
 import {HomeComponent} from './Components/home/home.component';
@@ -14,7 +13,11 @@ import {CalendarPageComponent} from './Pages/calendar-page/calendar-page.compone
 import {MatIconModule, MatIconRegistry} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {BookingPageComponent} from './Pages/booking-page/booking-page.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 @NgModule({
@@ -29,6 +32,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatButtonModule,
     MatIconModule,
     MatToolbarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatFormFieldModule,
     WeatherTestComponent,
     RouterOutlet,
     RouterModule.forRoot([ //most specific routes on top

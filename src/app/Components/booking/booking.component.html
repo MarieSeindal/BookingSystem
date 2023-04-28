@@ -1,41 +1,58 @@
 <div class="d-flex flex-column">
 
+  <form [formGroup]="formGroup" (ngSubmit)="submitBooking(formGroup)" class="d-flex flex-column">
+
   <!-- Title -->
-
   <mat-form-field appearance="fill">
-    <mat-label></mat-label>
-    <input matInput>
-  </mat-form-field>
-
-  <!-- Location -->
-  <mat-form-field>
-    <mat-label>Select an option</mat-label>
-    <mat-select>
-      <mat-option>None</mat-option>
-      <mat-option value="option1">Room 1</mat-option>
-      <mat-option value="option2">Room 2</mat-option>
-      <mat-option value="option3">Room 3</mat-option>
-      <mat-option value="option3">Room 4</mat-option>
-      <mat-option value="option3">Hall 1</mat-option>
-      <mat-option value="option3">Hall 2</mat-option>
-    </mat-select>
+    <mat-label>Title</mat-label>
+    <input matInput placeholder="Enter title for booking" formControlName="title">
   </mat-form-field>
 
   <!-- Date -->
+    <mat-form-field appearance="fill">
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="picker"  formControlName="date">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
 
   <!-- Time / all day -->
+    <mat-form-field appearance="fill">
+      <mat-label>Time</mat-label>
+      <input matInput formControlName="time">
+    </mat-form-field>
 
-  <mat-slide-toggle class="m-3" [color]="'primary'">All day</mat-slide-toggle>
+
+    <mat-slide-toggle class="m-3" [color]="'primary'" [checked]="false" (toggleChange)="switchAllDay()">All day</mat-slide-toggle>
 
   <!-- Meeting room selection -->
+    <!-- Location -->
+    <mat-form-field>
+      <mat-label>Select a room</mat-label>
+      <mat-select formControlName="room">
+        <mat-option>None</mat-option>
+        <mat-option value="Room 1">Room 1</mat-option>
+        <mat-option value="Room 2">Room 2</mat-option>
+        <mat-option value="Room 3">Room 3</mat-option>
+        <mat-option value="Room 4">Room 4</mat-option>
+        <mat-option value="Hall 1">Hall 1</mat-option>
+        <mat-option value="Hall 2">Hall 2</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <!-- Room info from FM -->
+    <!-- Room info from FM -->
 
   <!-- Description -->
   <mat-form-field appearance="fill">
     <mat-label>Textarea</mat-label>
-    <textarea matInput></textarea>
+    <textarea matInput formControlName="description"></textarea>
   </mat-form-field>
 
+    <button mat-raised-button type="submit">Save Settings</button>
+
+    <p>Form Group Status: {{formGroup.status}}</p>
+
+  </form>
 
 </div>
