@@ -1,11 +1,10 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSelectModule} from '@angular/material/select';
 import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
-import {MatNativeDateModule} from '@angular/material/core';
 import {DateAdapter} from '@angular/material/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
@@ -36,7 +35,6 @@ export class BookingComponent {
   protected _allDay = false;
   public allDay = false;
   public value ='';
-  private defaultTime = new Date().getTime();
   public selectedDate: Date | null = new Date();
   public formDate = new FormControl(this.selectedDate);
   public startDate = new FormControl(new Date());
@@ -109,8 +107,5 @@ export class BookingComponent {
     console.log('All day swap to', !this._allDay);
     this.isDisabled = !this._allDay;
     this.allDay = !this.allDay;
-  }
-  public  getAllDay (): boolean {
-    return this.allDay;
   }
 }
