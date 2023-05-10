@@ -49,7 +49,7 @@ export class BookingComponent {
   });
 
 
-  public set isDisabled(value: boolean) {
+  public set isDisabled(value: boolean) { // https://angular.io/api/forms/FormControl#reset & https://stackoverflow.com/questions/50220643/disable-angular-5-input-fields-correct-way
     this._allDay = value;
     if(value) {
       this.formGroup.controls['time'].disable();
