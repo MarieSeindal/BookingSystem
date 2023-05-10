@@ -28,7 +28,7 @@ export class WeatherTestService {
         catchError(this.handleError<Weather[]>('getWeather',[]))
       )
   }
-  private handleError<T>(operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) { // https://angular.io/tutorial/tour-of-heroes/toh-pt6#error-handling
     return (error: any): Observable<T> => {
 
       console.error(error); // log to console instead
