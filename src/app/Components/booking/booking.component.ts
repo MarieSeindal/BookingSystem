@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSelectModule} from '@angular/material/select';
@@ -9,6 +9,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {DateAdapter} from '@angular/material/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import {MatCardModule} from '@angular/material/card';
 
 
 @Component({
@@ -24,6 +25,7 @@ import {MatIconModule} from '@angular/material/icon';
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
+    MatCardModule,
   ],
   templateUrl: './booking.component.html',
   styleUrls: ['./booking.component.scss'],
@@ -31,19 +33,33 @@ import {MatIconModule} from '@angular/material/icon';
 })
 export class BookingComponent {
 
+  protected _allDay = false;
   public allDay = false;
   public value ='';
+  private defaultTime = new Date().getTime();
+  public selectedDate: Date | null = new Date();
+  public formDate = new FormControl(this.selectedDate);
+  public startDate = new FormControl(new Date());
 
-  isChecked = true;
   formGroup = this._formBuilder.group({
     title: [''],
-    date: ['', Validators.required],
-    time: new FormControl({value: '', disabled: this.getAllDay()}),
+    date: [''],
+    time: ['', Validators.required],
     room: ['', Validators.required],
     description: [''],
     // acceptTerms: ['', Validators.requiredTrue],
   });
 
+
+  public set isDisabled(value: boolean) {
+    this._allDay = value;
+    if(value) {
+      this.formGroup.controls['time'].disable();
+      this.formGroup.controls['time'].reset();
+    } else {
+      this.formGroup.controls['time'].enable();
+    }
+  }
   /* Not used, but good to show manipulation of form-group */
   // public myError = (controlName: string, errorName: string) =>{
   //
@@ -59,25 +75,42 @@ export class BookingComponent {
   //   return null;
   // }
 
-  constructor(private _formBuilder: FormBuilder) {}
-
-  public submitBooking(formGroup: FormGroup){
-    alert(JSON.stringify(formGroup.value, null, 2));
-
+  constructor(
+    private _formBuilder: FormBuilder,
+    private dateAdapter: DateAdapter<Date>,
+  ){
+    this.dateAdapter.setLocale('da')
   }
 
+  // public dateToForm() { // Not used
+  //   this.formDate = new FormControl(this.selectedDate);
+  //   return this.formDate;
+  // }
+  //
+  // public formToDate(){
+  //   this.selectedDate = this.formDate? this.formDate.value : this.selectedDate;
+  //   return this.selectedDate;
+  // }
 
-  selected = 'option2';
-  disableSelect = new FormControl(false);
 
+
+  public submitBooking(formGroup: FormGroup){
+    console.log('Booking', formGroup.value);
+
+    // Check booking info
+
+
+    //
+    // alert(JSON.stringify(formGroup.value, null, 2));
+  }
   public picker: any;
 
   public switchAllDay(){
-    console.log('All day swap to', !this.allDay);
+    console.log('All day swap to', !this._allDay);
+    this.isDisabled = !this._allDay;
     this.allDay = !this.allDay;
   }
   public  getAllDay (): boolean {
     return this.allDay;
   }
-
 }

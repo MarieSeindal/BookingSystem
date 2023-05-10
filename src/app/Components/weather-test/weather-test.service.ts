@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
+import {Observable, of} from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import {Weather} from './weather';
 
@@ -21,8 +21,22 @@ export class WeatherTestService {
     private http: HttpClient
   ) {}
 
-  /** GET heroes from the server */
+  /** GET weather from the server */
   getWeather(): Observable<Weather[]> {
     return this.http.get<Weather[]>(this.weatherURL)
+      .pipe(
+        catchError(this.handleError<Weather[]>('getWeather',[]))
+      )
+  }
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+
+      console.error(error); // log to console instead
+      console.log(`${operation} failed: ${error.message}`);
+      alert('Service connection error!')
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
   }
 }
