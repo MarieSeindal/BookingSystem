@@ -1,19 +1,23 @@
-<p>Does weather-test work ?</p>
+<div class="m-5">
+
+<h3> This page is for testing while developing</h3>
 
 <!-- Single json object -->
-<pre>
-    {{(person|async)|json}}
+<div *ngIf="person|async as p">
+  Person
+  <pre>
+    {{p|json}}
   </pre>
+</div>
 
 <!-- List json object -->
 <div *ngIf="weather|async as weatherList">
+  Random vejr
   <div *ngFor="let a of weatherList">
-
     <pre>
       {{a|json}}
     </pre>
-
   </div>
 </div>
+</div>
 
-test
