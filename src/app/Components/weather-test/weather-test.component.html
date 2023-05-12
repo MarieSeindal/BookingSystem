@@ -2,12 +2,20 @@
 
 <h3> This page is for testing while developing</h3>
 
-<!-- Single json object -->
+<!-- Single json object. Lavet som listen nedenunder, da den ikke printer random [] -->
 <div *ngIf="person|async as p">
   Person
-  <pre>
-    {{p|json}}
-  </pre>
+  <div *ngFor="let a of p">
+    <pre>
+      {{a|json}}
+    </pre>
+  </div>
+
+<!-- Printer random [] todo-->
+<!--  <pre>-->
+<!--    {{p|json}}-->
+<!--  </pre>-->
+
 </div>
 
 <!-- List json object -->
