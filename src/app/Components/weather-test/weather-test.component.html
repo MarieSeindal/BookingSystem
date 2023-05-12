@@ -1,5 +1,11 @@
 <p>Does weather-test work ?</p>
 
+<!-- Single json object -->
+<pre>
+    {{(person|async)|json}}
+  </pre>
+
+<!-- List json object -->
 <div *ngIf="weather|async as weatherList">
   <div *ngFor="let a of weatherList">
 

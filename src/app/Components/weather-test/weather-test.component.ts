@@ -2,7 +2,9 @@ import {CommonModule} from '@angular/common';
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {WeatherTestService} from './weather-test.service';
 import {Weather} from './weather';
-import {Observable, of} from 'rxjs';
+import {async, Observable, of} from 'rxjs';
+import {Person} from './person';
+import {PersonTestService} from './personTestService';
 
 @Component({
   selector: 'weather-test',
@@ -15,13 +17,16 @@ import {Observable, of} from 'rxjs';
 export class WeatherTestComponent {
 
   weather: Observable<Weather[]> = of([]);
+  person: Observable<Person[]> = of([]);
 
   constructor(
     private weatherService: WeatherTestService,
+    private personService: PersonTestService,
   ) {}
 
   ngOnInit() {
     this.weather = this.weatherService.getWeather();
+    this.person = this.personService.getPerson();
   }
 
 }
