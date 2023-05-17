@@ -27,7 +27,13 @@ export class PersonTestService {
     return this.http.get<Person[]>(this.connectURL)
       .pipe(
         catchError(this.error.handleError<Person[]>('getPerson1',[]))
-        //this.handleError<Person[]>('getPerson1',[])
+      )
+  }
+
+  postPerson(person: Person): Observable<Person[]> {
+    return this.http.post<Person[]>(this.connectURL, person, httpOptions)
+      .pipe(
+        catchError(this.error.handleError<Person[]>('postPerson1' + person,[]))
       )
   }
 }

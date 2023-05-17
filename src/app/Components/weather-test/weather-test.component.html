@@ -1,6 +1,23 @@
 <div class="m-5">
 
-<h3> This page is for testing while developing</h3>
+<h3> This page is for testing and experimenting while developing</h3>
+
+  <form
+    [formGroup]="formPerson"
+    (ngSubmit)="submitPerson(formPerson)">
+
+    <table class="example-full-width" cellspacing="0"><tr>
+      <td><mat-form-field class="example-full-width">
+        <mat-label>First name</mat-label>
+        <input matInput>
+      </mat-form-field></td>
+      <td><mat-form-field class="example-full-width">
+        <mat-label>Last Name</mat-label>
+        <input matInput>
+      </mat-form-field></td>
+    </tr></table>
+    <button mat-raised-button type="submit">Tilføj Person</button>
+  </form>
 
 <!-- Single json object. Lavet som listen nedenunder, da den ikke printer random [] -->
 <div *ngIf="person|async as p">
@@ -11,7 +28,7 @@
     </pre>
   </div>
 
-<!-- Printer random [] todo-->
+<!-- Printer random [] //Cleanup-->
 <!--  <pre>-->
 <!--    {{p|json}}-->
 <!--  </pre>-->

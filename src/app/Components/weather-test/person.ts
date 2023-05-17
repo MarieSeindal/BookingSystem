@@ -1,6 +1,6 @@
 
 export interface Person {
-  "id": 0,
+  "id": number,
   "lName": "string",
   "fName": "string"
 }
