@@ -6,14 +6,14 @@
     [formGroup]="formPerson"
     (ngSubmit)="submitPerson(formPerson)">
 
-    <table class="example-full-width" cellspacing="0"><tr>
+    <table class="example-full-width"><tr>
       <td><mat-form-field class="example-full-width">
         <mat-label>First name</mat-label>
-        <input matInput>
+        <input matInput type="text" formControlName="firstName" name="firstName">
       </mat-form-field></td>
       <td><mat-form-field class="example-full-width">
         <mat-label>Last Name</mat-label>
-        <input matInput>
+        <input matInput formControlName="lastName">
       </mat-form-field></td>
     </tr></table>
     <button mat-raised-button type="submit">Tilføj Person</button>
@@ -22,27 +22,27 @@
 <!-- Single json object. Lavet som listen nedenunder, da den ikke printer random [] -->
 <div *ngIf="person|async as p">
   Person
-  <div *ngFor="let a of p">
-    <pre>
-      {{a|json}}
-    </pre>
-  </div>
+<!--  <div *ngFor="let a of p">-->
+<!--    <pre>-->
+<!--      {{a|json}}-->
+<!--    </pre>-->
+<!--  </div>-->
 
-<!-- Printer random [] //Cleanup-->
-<!--  <pre>-->
-<!--    {{p|json}}-->
-<!--  </pre>-->
+<!-- Single version -->
+  <pre>
+    {{p|json}}
+  </pre>
 
 </div>
 
 <!-- List json object -->
-<div *ngIf="weather|async as weatherList">
-  Random vejr
-  <div *ngFor="let a of weatherList">
-    <pre>
-      {{a|json}}
-    </pre>
+  <div *ngIf="weather|async as weatherList">
+    Random vejr
+    <div *ngFor="let a of weatherList">
+      <pre>
+        {{a|json}}
+      </pre>
+    </div>
   </div>
-</div>
 </div>
 

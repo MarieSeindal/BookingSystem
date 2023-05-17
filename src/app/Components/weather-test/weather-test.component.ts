@@ -22,6 +22,8 @@ export class WeatherTestComponent {
   weather: Observable<Weather[]> = of([]);
   person: Observable<Person[]> = of([]);
 
+  private listOfPersons:any[] = [];
+
   // @Output() // do I need an event emitter here?
   // public personClicked = new EventEmitter<MouseEvent>();
 
@@ -40,20 +42,28 @@ export class WeatherTestComponent {
 
   public submitPerson(formPers: FormGroup) {
 
-    const fname =formPers.controls['firstname'].value;
-    const lname =formPers.controls['lastname'].value;
+    // console.log('First person from form', formPers.value);
 
-    const pers: Person = {id: 1, fName: fname, lName: lname};
-
-    // this.formGroup.controls['title'].value; // experiment, how to get only 1 value, here title.
-
+    const fname = formPers.get('firstName')?.value;
     console.log('fname',fname);
+
+    // const fname = formPers.value.get('firstName'); // nope
+    // const fname = formPers.get('firstName')?.value; // yes after im not dumb xD
+    // const fname =formPers.controls['firstname'].value; // nope
+
+    const lname =formPers.get('lastName')?.value;
+
+    const id = Math.round(Math.random()*100);
+
+    const pers: Person = {id: id, fName: fname, lName: lname};
+
     console.log('object', pers);
 
     //pers.fName=formPers.controls['firstname'].value;
 
     // call service
-    // this.personService.postPerson();
+    this.personService.postPerson(pers)
+      .subscribe(p => this.listOfPersons.push(p));
 
   }
 
