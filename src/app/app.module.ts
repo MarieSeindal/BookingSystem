@@ -18,6 +18,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {AddPersonPageComponent} from "./Pages/add-person-page/add-person-page.component";
+import {ShowPersonComponent} from "./Pages/add-person-page/show-person/show-person.component";
 
 
 @NgModule({
@@ -40,6 +42,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     RouterOutlet,
     RouterModule.forRoot([ //most specific routes on top
       {path: '', component: HomeComponent}, //Default page or home page
+      {path: 'user/:userId', component: ShowPersonComponent}, // https://stackblitz.com/github/rangle/angular-book-examples/tree/feat-programmatic-route-navigation?file=src%2Fapp%2Fapp.component.html
+      {path: 'user', component: AddPersonPageComponent},
       // {path: 'calendar/:userId', component: CalendarComponent},
       {path: 'calendar', component: CalendarPageComponent},
       // {path: 'booking/:userId', component: BookingComponent},

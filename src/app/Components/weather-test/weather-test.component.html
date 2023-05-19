@@ -2,23 +2,6 @@
 
 <h3> This page is for testing and experimenting while developing</h3>
 
-  <form
-    [formGroup]="formPerson"
-    (ngSubmit)="submitPerson(formPerson)">
-
-    <table class="example-full-width"><tr>
-      <td><mat-form-field class="example-full-width">
-        <mat-label>First name</mat-label>
-        <input matInput type="text" formControlName="firstName" name="firstName">
-      </mat-form-field></td>
-      <td><mat-form-field class="example-full-width">
-        <mat-label>Last Name</mat-label>
-        <input matInput formControlName="lastName">
-      </mat-form-field></td>
-    </tr></table>
-    <button mat-raised-button type="submit">Tilføj Person</button>
-  </form>
-
 <!-- Single json object. Lavet som listen nedenunder, da den ikke printer random [] -->
 <div *ngIf="person|async as p">
   Person

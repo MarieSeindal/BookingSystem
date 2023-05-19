@@ -30,10 +30,11 @@ export class PersonTestService {
       )
   }
 
-  postPerson(person: Person): Observable<Person[]> {
-    return this.http.post<Person[]>(this.connectURL, person, httpOptions)
+  postPerson(person: Person, id: number): Observable<Person[]> {
+    const userURLString = 'https://localhost:7041/user/'+id;
+    return this.http.post<Person[]>(userURLString, person, httpOptions)
       .pipe(
-        catchError(this.error.handleError<Person[]>('postPerson1' + person,[]))
+        catchError(this.error.handleError<Person[]>(userURLString + person,[]))
       )
   }
 }
