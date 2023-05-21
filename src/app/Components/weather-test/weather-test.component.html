@@ -6,13 +6,14 @@
 <div *ngIf="person|async as p">
   Person
 <!--  <div *ngFor="let a of person|async">-->
-<!--    <pre *ngIf="(p|json).length > 0 ">-->
-<!--      {{p|json}}-->
+<!--    <pre>-->
+<!--      {{a|json}}-->
 <!--    </pre>-->
 <!--  </div>-->
 
-<!-- Single version shows person, but generates an [] if service fails-->
-  <pre *ngIf="p.length > 0">
+
+  <!-- Single version shows person, but generates an [] if service fails-->
+  <pre *ngIf="p.length !== 0"> <!-- if service fails, the p has a length of 0 -->
     {{p|json}}
   </pre>
 

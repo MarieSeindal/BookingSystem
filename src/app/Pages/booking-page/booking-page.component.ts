@@ -7,7 +7,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {BookingService} from '../../Components/booking/BookingService';
 import {Observable, of} from 'rxjs';
-import {Weather} from '../../Components/weather-test/weather';
+import {Booking} from '../../Components/booking/booking';
 
 
 @Component({
@@ -19,14 +19,14 @@ import {Weather} from '../../Components/weather-test/weather';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookingPageComponent {
-  booking: Observable<Weather[]> = of([]);
+  booking: Observable<Booking[]> = of([]);
   constructor(
     private _bookingService: BookingService,
   ) {
   }
 
   ngOnInit() {
-
+    this.booking = this._bookingService.getBooking();
   }
 
 }
