@@ -26,7 +26,7 @@ export class BookingService {
   getBooking(): Observable<Booking[]> {
     return this.http.get<Booking[]>(this.connectURL+'/1') // 1 is a test id, need to be replaced later todo;
       .pipe(
-        catchError(this.error.handleError<Booking[]>('getPerson1',[]))
+        catchError(this.error.handleError<Booking[]>('getBooking',[]))
       )
   }
 
