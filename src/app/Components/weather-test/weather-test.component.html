@@ -5,16 +5,16 @@
 <!-- Single json object. Lavet som listen nedenunder, da den ikke printer random [] -->
 <div *ngIf="person|async as p">
   Person
-  <div *ngFor="let a of p">
-    <pre>
-      {{a|json}}
-    </pre>
-  </div>
+<!--  <div *ngFor="let a of person|async">-->
+<!--    <pre *ngIf="(p|json).length > 0 ">-->
+<!--      {{p|json}}-->
+<!--    </pre>-->
+<!--  </div>-->
 
-<!-- Single version sometimes is the only thing that works, but generates an [] if service fails-->
-<!--  <pre>-->
-<!--    {{p|json}}-->
-<!--  </pre>-->
+<!-- Single version shows person, but generates an [] if service fails-->
+  <pre *ngIf="p.length > 0">
+    {{p|json}}
+  </pre>
 
 </div>
 

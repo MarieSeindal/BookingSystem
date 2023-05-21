@@ -2,7 +2,7 @@ import {CommonModule} from '@angular/common';
 import {ChangeDetectionStrategy, Component, EventEmitter, Output} from '@angular/core';
 import {WeatherTestService} from './weather-test.service';
 import {Weather} from './weather';
-import {Observable, of} from 'rxjs';
+import {isEmpty, Observable, of} from 'rxjs';
 import {Person} from './person';
 import {PersonTestService} from './personTestService';
 import {MatInputModule} from '@angular/material/input';
@@ -48,4 +48,5 @@ export class WeatherTestComponent {
     this.person = this.personService.getPerson();
   }
 
+  protected readonly isEmpty = isEmpty;
 }
