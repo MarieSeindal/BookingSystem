@@ -43,7 +43,9 @@ import {ShowPersonComponent} from "./Pages/add-person-page/show-person/show-pers
     RouterModule.forRoot([ //most specific routes on top
       {path: '', component: HomeComponent}, //Default page or home page
       {path: 'user/:userId', component: ShowPersonComponent}, // https://stackblitz.com/github/rangle/angular-book-examples/tree/feat-programmatic-route-navigation?file=src%2Fapp%2Fapp.component.html
-      {path: 'user', component: AddPersonPageComponent},
+      {path: 'user', component: AddPersonPageComponent, children:[
+          // {path: '/login', component: SomeOtherCom}
+        ]},
       // {path: 'calendar/:userId', component: CalendarComponent},
       {path: 'calendar', component: CalendarPageComponent},
       // {path: 'booking/:userId', component: BookingComponent},
