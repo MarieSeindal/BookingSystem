@@ -5,7 +5,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {Person} from "../../Components/weather-test/person";
-import {PersonTestService} from "../../Components/weather-test/personTestService";
+import {PersonTestService} from "../../Services/personTestService";
 import {Router, RouterLink} from "@angular/router";
 
 @Component({

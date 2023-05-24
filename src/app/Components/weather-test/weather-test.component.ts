@@ -1,10 +1,10 @@
 import {CommonModule} from '@angular/common';
 import {ChangeDetectionStrategy, Component, EventEmitter, Output} from '@angular/core';
-import {WeatherTestService} from './weather-test.service';
+import {WeatherTestService} from '../../Services/weather-test.service';
 import {Weather} from './weather';
 import {isEmpty, Observable, of} from 'rxjs';
 import {Person} from './person';
-import {PersonTestService} from './personTestService';
+import {PersonTestService} from '../../Services/personTestService';
 import {MatInputModule} from '@angular/material/input';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
@@ -22,21 +22,14 @@ export class WeatherTestComponent {
   weather: Observable<Weather[]> = of([]);
   person: Observable<Person[]> = of([]);
 
-
   // @Output() // do I need an event emitter here?
   // public personClicked = new EventEmitter<MouseEvent>();
-
 
   constructor(
     private weatherService: WeatherTestService,
     private personService: PersonTestService,
     private _formBuilder: FormBuilder,
   ) {}
-
-
-
-
-
 
   // public clickAddPerson($event: MouseEvent) { // either call a function or emit an event
   //
@@ -47,6 +40,4 @@ export class WeatherTestComponent {
     this.weather = this.weatherService.getWeather();
     this.person = this.personService.getPerson();
   }
-
-  protected readonly isEmpty = isEmpty;
 }

@@ -3,8 +3,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import {Weather} from './weather';
-import {ServiceConnectionError} from '../../ErrorHandling/ServiceConnectionError';
+import {Weather} from '../Components/weather-test/weather';
+import {ServiceConnectionError} from '../ErrorHandling/ServiceConnectionError';
 
 const httpOptions = {
   headers: new HttpHeaders({

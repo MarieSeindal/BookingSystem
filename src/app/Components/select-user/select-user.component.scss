@@ -1,0 +1,10 @@
+:host {
+  display: block;
+}
+
+
+.grid-test {
+  display: grid;
+  grid-template-areas: "a a";
+  gap: 10px;
+}

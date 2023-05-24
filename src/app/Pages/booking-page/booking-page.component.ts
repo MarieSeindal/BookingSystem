@@ -5,7 +5,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCardModule} from '@angular/material/card';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {BookingService} from '../../Components/booking/BookingService';
+import {BookingService} from '../../Services/BookingService';
 import {Observable, of} from 'rxjs';
 import {Booking} from '../../Components/booking/booking';
 
