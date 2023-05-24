@@ -2,7 +2,7 @@ import {CommonModule} from '@angular/common';
 import {ChangeDetectionStrategy, Component, EventEmitter, Output} from '@angular/core';
 import {WeatherTestService} from '../../Services/weather-test.service';
 import {Weather} from './weather';
-import {isEmpty, Observable, of} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {Person} from './person';
 import {PersonTestService} from '../../Services/personTestService';
 import {MatInputModule} from '@angular/material/input';

@@ -4,6 +4,7 @@ import {UserService} from '../../Services/UserService';
 import {Observable, of} from 'rxjs';
 import {User} from './user';
 import {MatButtonModule} from '@angular/material/button';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'select-user',
@@ -19,11 +20,20 @@ export class SelectUserComponent implements OnInit{
 
 
   constructor(
-    public userService: UserService
+    public userService: UserService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
     this.users = this.userService.getAllUsers();
+  }
+
+  onUserClick(event: Event, user: User) {
+    sessionStorage.setItem("user", user.userId);
+    this.router.navigate(['app/home']);
+
+
+    console.log("click", event, user);
   }
 
 

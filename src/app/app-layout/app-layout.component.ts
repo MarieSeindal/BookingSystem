@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {RouterLink, RouterOutlet} from '@angular/router';
+import {Router, RouterLink, RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'app-layout',
@@ -13,6 +13,23 @@ import {RouterLink, RouterOutlet} from '@angular/router';
   styleUrls: ['./app-layout.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppLayoutComponent {
+export class AppLayoutComponent implements OnInit{
 
+
+  constructor(
+    private router: Router,
+  ) {
+  }
+
+  ngOnInit(): void {
+    if (sessionStorage.getItem('user') === null) {
+      this.router.navigate(['login']);
+    }
+  }
+
+  public logOut(event: Event) {
+    sessionStorage.removeItem('user');
+    this.router.navigate(['login']);
+
+  }
 }
