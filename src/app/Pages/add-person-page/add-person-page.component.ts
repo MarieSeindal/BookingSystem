@@ -39,7 +39,6 @@ export class AddPersonPageComponent {
 
   public submitPerson(formPers: FormGroup) {
 
-    // console.log('First person from form', formPers.value);
 
     const placeholderID: any = '';
     const placeholderPW: any = '';
@@ -50,9 +49,6 @@ export class AddPersonPageComponent {
 
     const user: User = {userId: placeholderID, firstName: fname, lastName: lname, password: pw, isAdmin: false};
 
-    console.log('object', user);
-
-    //pers.fName=formPers.controls['firstname'].value;
 
     // call service
     this.userService.postUser(user)
@@ -60,10 +56,7 @@ export class AddPersonPageComponent {
         console.log('response form post',res);
       });
 
-    // this.router.navigate(['/user', id]);
-
-    // this.router.navigate(['/user'], { queryParams: { user: id } }); // this uses params instead. I'm ok with just route
-
+    this.router.navigate(['/user']);
   }
 
 }
