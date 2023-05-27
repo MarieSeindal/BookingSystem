@@ -1,9 +1,10 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {Router, RouterLink, RouterOutlet} from '@angular/router';
+import {UserService} from "../Services/UserService";
 
 @Component({
   selector: 'app-layout',
@@ -11,21 +12,32 @@ import {Router, RouterLink, RouterOutlet} from '@angular/router';
 	imports: [CommonModule, MatButtonModule, MatIconModule, MatToolbarModule, RouterLink, RouterOutlet],
   templateUrl: './app-layout.component.html',
   styleUrls: ['./app-layout.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppLayoutComponent implements OnInit{
+
+  protected adminAccess = false;
 
 
   constructor(
     private router: Router,
+    private ref: ChangeDetectorRef,
+    private userService: UserService,
   ) {
   }
 
   ngOnInit(): void {
-    const user = sessionStorage.getItem('user');
-    if (!(sessionStorage.getItem('user') === null)) {
+    const userId = sessionStorage.getItem('user');
+    if (!(userId === null)) {
 
-      //Fetch users permission
+      //Fetch user permission
+      const isAdmin = this.userService.getUserPermission(userId);
+
+      isAdmin.forEach(b => {
+        this.adminAccess = b;
+        console.log('is adminS',b);
+      }); // there should be only 1 value in the returned array
+
+        this.ref.detectChanges();
 
 
 

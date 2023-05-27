@@ -30,6 +30,17 @@ export class UserService {
       )
   }
 
+  getUserPermission(userId: string): Observable<boolean> {
+
+    const url = this.connectURL+'/permission/'+userId;
+    console.log('url',url);
+
+    return this.http.get<boolean>(url) //
+      .pipe(
+        catchError(this.error.handleError<boolean>('getUserPermission',))
+      )
+  }
+
   postUser(person: User): Observable<User[]> {
     const userURLString = 'https://localhost:7041/user/';
     return this.http.post<User[]>(userURLString, person, httpOptions)
