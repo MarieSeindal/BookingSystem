@@ -30,11 +30,11 @@ export class UserService {
       )
   }
 
-  // postUser(person: User, id: number): Observable<User[]> {
-  //   const userURLString = 'https://localhost:7041/user/'+id;
-  //   return this.http.post<User[]>(userURLString, person, httpOptions)
-  //     .pipe(
-  //       catchError(this.error.handleError<User[]>(userURLString + person,[]))
-  //     )
-  // }
+  postUser(person: User): Observable<User[]> {
+    const userURLString = 'https://localhost:7041/user/';
+    return this.http.post<User[]>(userURLString, person, httpOptions)
+      .pipe(
+        catchError(this.error.handleError<User[]>(userURLString + person,[]))
+      )
+  }
 }

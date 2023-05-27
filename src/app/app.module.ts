@@ -22,6 +22,14 @@ import {AddPersonPageComponent} from "./Pages/add-person-page/add-person-page.co
 import {ShowPersonComponent} from "./Pages/add-person-page/show-person/show-person.component";
 import {AppLayoutComponent} from './app-layout/app-layout.component';
 import {LoginComponent} from './Pages/login/login.component';
+import {JwtModule} from '@auth0/angular-jwt';
+import {AuthModule} from '@auth0/auth0-angular';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
+export function tokenGetter() {
+  return localStorage.getItem("access_token");
+}
 
 
 @NgModule({
@@ -61,6 +69,7 @@ import {LoginComponent} from './Pages/login/login.component';
 
       {path: '**', component: NotFoundComponent}, // for any other not defined paths user may enter.
     ]),
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
   ],
   providers: [],
   bootstrap: [AppComponent]

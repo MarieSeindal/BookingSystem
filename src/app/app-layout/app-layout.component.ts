@@ -22,7 +22,14 @@ export class AppLayoutComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    if (sessionStorage.getItem('user') === null) {
+    const user = sessionStorage.getItem('user');
+    if (!(sessionStorage.getItem('user') === null)) {
+
+      //Fetch users permission
+
+
+
+    } else {
       this.router.navigate(['login']);
     }
   }

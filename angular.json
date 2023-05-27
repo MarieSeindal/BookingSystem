@@ -32,6 +32,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/angular-calendar/css/angular-calendar.css",
               "./node_modules/bootstrap/dist/css/bootstrap-reboot.min.css",
               "./node_modules/bootstrap/dist/css/bootstrap-utilities.min.css",
               "./node_modules/bootstrap/dist/css/bootstrap-grid.min.css",
@@ -97,6 +98,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/angular-calendar/css/angular-calendar.css",
               "src/styles.scss",
               "src/theme.scss"
             ],

@@ -4,14 +4,15 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
-import {Person} from "../../Components/weather-test/person";
-import {PersonTestService} from "../../Services/personTestService";
+import {UserService} from "../../Services/UserService";
 import {Router, RouterLink} from "@angular/router";
+import {MatIconModule} from "@angular/material/icon";
+import {User} from "../../Components/select-user/user";
 
 @Component({
   selector: 'add-person-page',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, MatButtonModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterLink, MatIconModule],
   templateUrl: './add-person-page.component.html',
   styleUrls: ['./add-person-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -21,7 +22,7 @@ export class AddPersonPageComponent {
   private listOfPersons:any[] = [];
 
   constructor(
-    private personService: PersonTestService,
+    private userService: UserService,
     private _formBuilder: FormBuilder,
     private router: Router,
     ){
@@ -30,28 +31,36 @@ export class AddPersonPageComponent {
   formPerson = this._formBuilder.group({
     firstName: [''],
     lastName: [''],
+    passWord: [''],
   });
+
+  hide = true;
+  get passwordInput() { return this.formPerson.get('passWord'); }
 
   public submitPerson(formPers: FormGroup) {
 
     // console.log('First person from form', formPers.value);
 
+    const placeholderID: any = '';
+    const placeholderPW: any = '';
+
     const fname = formPers.get('firstName')?.value;
     const lname =formPers.get('lastName')?.value;
-    const id = Math.round(Math.random()*100);
-    const pers: Person = {id: id, fName: fname, lName: lname};
+    const pw =formPers.get('passWord')?.value;
 
-    console.log('object', pers);
+    const user: User = {userId: placeholderID, firstName: fname, lastName: lname, password: pw, isAdmin: false};
+
+    console.log('object', user);
 
     //pers.fName=formPers.controls['firstname'].value;
 
     // call service
-    this.personService.postPerson(pers, id)
+    this.userService.postUser(user)
       .subscribe((res) => {
         console.log('response form post',res);
       });
 
-    this.router.navigate(['/user', id]);
+    // this.router.navigate(['/user', id]);
 
     // this.router.navigate(['/user'], { queryParams: { user: id } }); // this uses params instead. I'm ok with just route
 
