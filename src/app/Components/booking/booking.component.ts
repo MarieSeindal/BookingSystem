@@ -11,6 +11,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {Booking} from "./booking";
 import {BookingService} from "../../Services/BookingService";
+import {ToastrService} from "ngx-toastr";
 
 export type dateType = 'start' | 'end';
 
@@ -84,7 +85,8 @@ export class BookingComponent {
   constructor(
     private _formBuilder: FormBuilder,
     private dateAdapter: DateAdapter<Date>,
-    public bookingService: BookingService,
+    private toast: ToastrService,
+  public bookingService: BookingService,
   ){
     this.dateAdapter.setLocale('da');
   }
@@ -133,7 +135,15 @@ export class BookingComponent {
 
     const userID: any = sessionStorage.getItem('user') ?? 'ERROR in userID';
 
-    this.bookingService.postBooking(booking, userID);
+    this.bookingService.postBooking(booking, userID)      .subscribe((res) => {
+      console.log('response form post',res);
+      // window.location.reload();
+
+      this.toast.success('Booking created','Success', {
+        timeOut: 2000,
+        disableTimeOut: false,
+      });
+    });
     console.log('After post');
 
     // alert(JSON.stringify(formGroup.value, null, 2));

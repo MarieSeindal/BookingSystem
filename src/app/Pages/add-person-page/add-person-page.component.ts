@@ -56,7 +56,7 @@ export class AddPersonPageComponent {
     // call service
     this.userService.postUser(user)
       .subscribe((res) => {
-        console.log('response form post',res);
+        console.log('response form postUser',res);
         // window.location.reload();
 
         this.toast.success('User created','Success', {
