@@ -26,6 +26,7 @@ import {JwtModule} from '@auth0/angular-jwt';
 import {AuthModule} from '@auth0/auth0-angular';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { ToastrModule } from 'ngx-toastr';
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -70,6 +71,7 @@ export function tokenGetter() {
       {path: '**', component: NotFoundComponent}, // for any other not defined paths user may enter.
     ]),
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

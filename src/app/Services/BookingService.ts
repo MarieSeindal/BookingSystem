@@ -30,11 +30,13 @@ export class BookingService {
       )
   }
 
-  // postBooking(person: Booking, id: number): Observable<Booking[]> {
-  //   const userURLString = 'https://localhost:7041/user/'+id;
-  //   return this.http.post<Booking[]>(userURLString, person, httpOptions)
-  //     .pipe(
-  //       catchError(this.error.handleError<Booking[]>(userURLString + person,[]))
-  //     )
-  // }
+  postBooking(booking: Booking, userId: string): Observable<Booking[]> {
+    const bookUrl = 'https://localhost:7041/booking/'+userId;
+    console.log('url',bookUrl);
+
+    return this.http.post<Booking[]>(bookUrl, booking, httpOptions)
+      .pipe(
+        catchError(this.error.handleError<Booking[]>(bookUrl + booking,[]))
+      )
+  }
 }

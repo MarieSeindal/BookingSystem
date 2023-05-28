@@ -34,7 +34,6 @@
       <mat-label>Vælg en dato</mat-label>
       <input
         matInput [matDatepicker]="picker"
-        [formControl]="startDate"
         formControlName="date">
 <!--      <mat-hint>MM/DD/YYYY</mat-hint>-->
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
@@ -58,6 +57,11 @@
       <input type="time" matInput formControlName="time">
     </mat-form-field>
 
+    <mat-form-field appearance="fill">
+      <mat-label>Varighed i minutter</mat-label>
+      <input type="number" matInput formControlName="duration" step="5">
+    </mat-form-field>
+
 
   <!-- Meeting room selection -->
     <!-- Location -->
@@ -66,12 +70,12 @@
       <mat-label>Vælg en lokation</mat-label>
       <mat-select formControlName="room">
         <mat-option>Ingen</mat-option>
-        <mat-option value="Room 1">Room 1</mat-option>
-        <mat-option value="Room 2">Room 2</mat-option>
-        <mat-option value="Room 3">Room 3</mat-option>
-        <mat-option value="Room 4">Room 4</mat-option>
-        <mat-option value="Hall 1">Hall 1</mat-option>
-        <mat-option value="Hall 2">Hall 2</mat-option>
+        <mat-option value="1">Rum 1</mat-option>
+        <mat-option value="2">Rum 2</mat-option>
+        <mat-option value="3">Rum 3</mat-option>
+        <mat-option value="4">Rum 4</mat-option>
+        <mat-option value="5">Hal 1</mat-option>
+        <mat-option value="6">Hal 2</mat-option>
       </mat-select>
       <mat-error> Venligst vælg en lokation </mat-error>
     </mat-form-field>

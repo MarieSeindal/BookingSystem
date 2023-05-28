@@ -8,6 +8,7 @@ import {UserService} from "../../Services/UserService";
 import {Router, RouterLink} from "@angular/router";
 import {MatIconModule} from "@angular/material/icon";
 import {User} from "../../Components/select-user/user";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'add-person-page',
@@ -25,13 +26,14 @@ export class AddPersonPageComponent {
     private userService: UserService,
     private _formBuilder: FormBuilder,
     private router: Router,
+    private toast: ToastrService
     ){
   }
 
   formPerson = this._formBuilder.group({
     firstName: [''],
     lastName: [''],
-    passWord: [''],
+    password: [''],
   });
 
   hide = true;
@@ -44,19 +46,26 @@ export class AddPersonPageComponent {
     const placeholderPW: any = '';
 
     const fname = formPers.get('firstName')?.value;
-    const lname =formPers.get('lastName')?.value;
-    const pw =formPers.get('passWord')?.value;
+    const lname = formPers.get('lastName')?.value;
+    const pw = formPers.get('password')?.value;
 
     const user: User = {userId: placeholderID, firstName: fname, lastName: lname, password: pw, isAdmin: false};
+
 
 
     // call service
     this.userService.postUser(user)
       .subscribe((res) => {
         console.log('response form post',res);
+        // window.location.reload();
+
+        this.toast.success('User created','Success', {
+          timeOut: 2000,
+          disableTimeOut: false,
+        });
       });
 
-    this.router.navigate(['/user']);
+    // this.router.navigate(['app/user']);
   }
 
 }

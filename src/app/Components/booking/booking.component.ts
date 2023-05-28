@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSelectModule} from '@angular/material/select';
 import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
@@ -9,7 +9,11 @@ import {DateAdapter} from '@angular/material/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
-import { format, formatDistance, formatRelative, subDays } from 'date-fns';
+import {Booking} from "./booking";
+import {BookingService} from "../../Services/BookingService";
+
+export type dateType = 'start' | 'end';
+
 
 @Component({
   selector: 'booking',
@@ -41,7 +45,8 @@ export class BookingComponent {
 
   formGroup = this._formBuilder.group({
     title: [''],
-    date: [''],
+    date: ['', Validators.required],
+    duration: ['', Validators.required],
     time: ['', Validators.required],
     room: ['', Validators.required],
     description: [''],
@@ -53,9 +58,12 @@ export class BookingComponent {
     this._allDay = value;
     if(value) {
       this.formGroup.controls['time'].disable();
+      this.formGroup.controls['duration'].disable();
       this.formGroup.controls['time'].reset();
+      this.formGroup.controls['duration'].reset();
     } else {
       this.formGroup.controls['time'].enable();
+      this.formGroup.controls['duration'].enable();
     }
   }
   /* Not used, but good to show manipulation of form-group */
@@ -76,8 +84,9 @@ export class BookingComponent {
   constructor(
     private _formBuilder: FormBuilder,
     private dateAdapter: DateAdapter<Date>,
+    public bookingService: BookingService,
   ){
-    this.dateAdapter.setLocale('da')
+    this.dateAdapter.setLocale('da');
   }
 
   // public dateToForm() { // Not used
@@ -90,22 +99,66 @@ export class BookingComponent {
   //   return this.selectedDate;
   // }
 
-
-
   public submitBooking(formGroup: FormGroup){
-    console.log('Booking', formGroup.value);
+    console.log('Booking form', formGroup.value);
 
     // Check booking info
+    // let booking: any;
+
+    const temp: any = 'temp';
+
+    const booking: Booking = {
+      id: temp,
+      userId: temp,
+      title: formGroup.controls['title'].value,
+      startDate: this.convertDate(formGroup.controls['date'].value, formGroup.controls['time'].value, "start"),
+      endDate: this.convertDate(formGroup.controls['date'].value, formGroup.controls['time'].value, "end", formGroup.controls['duration'].value),
+      roomId: formGroup.controls['room'].value, //Math.round(Math.random()*100), // for evt test purpose
+      description: formGroup.controls['description'].value,
+    }
+
+    console.log('types:\n',
+      'title', typeof booking.title, booking.title, '\n',
+      'start', typeof booking.startDate, booking.startDate, '\n',
+      'end', typeof booking.endDate, booking.endDate, '\n',
+      'room', typeof booking.roomId, booking.roomId, '\n',
+      'descr', typeof booking.description, booking.description, '\n',
+      'all', this._allDay, '\n',
+    )
+
+    console.log('Booking', booking);
+    console.log('time', typeof formGroup.controls['time'].value, formGroup.controls['time'].value);
+    console.log('TESTING DATE', new Date(2023,10,23,10,65));
 
 
-    //
+    const userID: any = sessionStorage.getItem('user') ?? 'ERROR in userID';
+
+    this.bookingService.postBooking(booking, userID);
+    console.log('After post');
+
     // alert(JSON.stringify(formGroup.value, null, 2));
   }
-  public picker: any;
 
   public switchAllDay(){
     console.log('All day swap to', !this._allDay);
     this.isDisabled = !this._allDay;
     this.allDay = !this.allDay;
+  }
+
+  public convertDate(date: Date, time: string, startOrEnd: dateType, duration?: number) {
+
+    console.log('Year', date.getFullYear());
+
+    if (this._allDay) {
+      if (startOrEnd === "end"){ // if all day and the end date is being defined
+        return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59);
+      }
+      return date; // if all day, then no string = return the date with no changes.
+    }
+    const timeArray = time.split(':');
+    if (startOrEnd === "end")  {
+      return new Date(date.getFullYear(), date.getMonth(), date.getDate(), Number(timeArray[0]), Number(timeArray[1]));
+    }
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate(), Number(timeArray[0]), Number(timeArray[1]));
   }
 }
