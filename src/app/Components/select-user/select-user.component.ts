@@ -31,9 +31,6 @@ export class SelectUserComponent implements OnInit{
   onUserClick(event: Event, user: User) {
     sessionStorage.setItem("user", user.userId);
     this.router.navigate(['app/home']);
-
-
-    console.log("click", event, user);
   }
 
 

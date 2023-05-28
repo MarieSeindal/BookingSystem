@@ -102,7 +102,6 @@ export class BookingComponent {
   // }
 
   public submitBooking(formGroup: FormGroup){
-    console.log('Booking form', formGroup.value);
 
     // Check booking info
     // let booking: any;
@@ -119,24 +118,12 @@ export class BookingComponent {
       description: formGroup.controls['description'].value,
     }
 
-    console.log('types:\n',
-      'title', typeof booking.title, booking.title, '\n',
-      'start', typeof booking.startDate, booking.startDate, '\n',
-      'end', typeof booking.endDate, booking.endDate, '\n',
-      'room', typeof booking.roomId, booking.roomId, '\n',
-      'descr', typeof booking.description, booking.description, '\n',
-      'all', this._allDay, '\n',
-    )
-
-    console.log('Booking', booking);
-    console.log('time', typeof formGroup.controls['time'].value, formGroup.controls['time'].value);
-    console.log('TESTING DATE', new Date(2023,10,23,10,65));
-
 
     const userID: any = sessionStorage.getItem('user') ?? 'ERROR in userID';
 
-    this.bookingService.postBooking(booking, userID)      .subscribe((res) => {
-      console.log('response form post',res);
+    this.bookingService.postBooking(booking, userID)
+      .subscribe((res) => {
+      console.log('response form post booking',res);
       // window.location.reload();
 
       this.toast.success('Booking created','Success', {
@@ -144,20 +131,16 @@ export class BookingComponent {
         disableTimeOut: false,
       });
     });
-    console.log('After post');
 
     // alert(JSON.stringify(formGroup.value, null, 2));
   }
 
   public switchAllDay(){
-    console.log('All day swap to', !this._allDay);
     this.isDisabled = !this._allDay;
     this.allDay = !this.allDay;
   }
 
   public convertDate(date: Date, time: string, startOrEnd: dateType, duration?: number) {
-
-    console.log('Year', date.getFullYear());
 
     if (this._allDay) {
       if (startOrEnd === "end"){ // if all day and the end date is being defined

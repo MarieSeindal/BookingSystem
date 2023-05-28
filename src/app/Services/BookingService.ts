@@ -32,8 +32,6 @@ export class BookingService {
 
   postBooking(booking: Booking, userId: string): Observable<Booking[]> {
     const bookUrl = 'https://localhost:7041/booking/'+userId;
-    console.log('url',bookUrl);
-
     return this.http.post<Booking[]>(bookUrl, booking, httpOptions)
       .pipe(
         catchError(this.error.handleError<Booking[]>(bookUrl + booking,[]))

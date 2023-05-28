@@ -34,7 +34,6 @@ export class AppLayoutComponent implements OnInit{
 
       isAdmin.forEach(b => {
         this.adminAccess = b;
-        console.log('is adminS',b);
       }); // there should be only 1 value in the returned array
 
         this.ref.detectChanges();
