@@ -24,7 +24,7 @@ export class BookingService {
 
   /* GET Booking from the service from db */
   getBooking(): Observable<Booking[]> {
-    return this.http.get<Booking[]>(this.connectURL+'/1') // 1 is a test id, need to be replaced later todo;
+    return this.http.get<Booking[]>('https://localhost:7041/booking'+'/1') // 1 is a test id, need to be replaced later todo;
       .pipe(
         catchError(this.error.handleError<Booking[]>('getBooking',[]))
       )
@@ -35,6 +35,15 @@ export class BookingService {
     return this.http.post<Booking[]>(bookUrl, booking, httpOptions)
       .pipe(
         catchError(this.error.handleError<Booking[]>(bookUrl + booking,[]))
+      )
+  }
+
+  getBookings(userId: string): Observable<Booking[]> {
+    console.log('Get bookings for user called');
+    const url = 'https://localhost:7041/bookings/'+userId;
+    return this.http.get<Booking[]>(url) //
+      .pipe(
+        catchError(this.error.handleError<Booking[]>('getBookings',[]))
       )
   }
 }

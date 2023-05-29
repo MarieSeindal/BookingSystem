@@ -1,7 +1,38 @@
 
-<div>
 
-  Aktive bruger ID: {{sessionStorage.getItem('user')}}
+<div style="width: 600px">
+  Aktive bruger ID: {{userId}}
+
+<!--  <div *ngIf="bookings|async as usersList" >-->
+<!--    <div *ngFor="let booking of usersList" class="d-flex align-items-baseline">-->
+<!--      <p> Booking: {{booking.title}} {{booking.startDate}} (ID: {{booking.endDate}})</p>-->
+
+<!--    </div>-->
+<!--  </div>-->
+
+
+<!--      <div *ngFor="let b of bookingsFetched" class="d-flex align-items-baseline">-->
+<!--        <p> Booking: {{b.title}} {{b.startDate}} (ID: {{b.endDate}})</p>-->
+
+<!--      </div> -->
+
+
+<!--  <table>-->
+<!--    <caption>Dine bookninger</caption>-->
+<!--    ?-->
+<!--    <tbody *ngFor="let b of bookingsFetched">-->
+<!--      <tr>-->
+<!--        <td>Title: {{b.title}}</td>-->
+<!--        <td>Start: {{b.startDate}}</td>-->
+<!--        <td>End: {{b.endDate}}</td>-->
+<!--        <td>Description: {{b.description}}</td>-->
+
+
+<!--      </tr>-->
+<!--    </tbody>-->
+
+
+<!--  </table>-->
 
 </div>
 
