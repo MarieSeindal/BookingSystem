@@ -1,18 +1,27 @@
-import {AfterContentInit, AfterViewInit, ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {
+  AfterContentInit,
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {Booking} from "../../Components/booking/booking";
 import {BookingService} from "../../Services/BookingService";
 import {Observable, of} from "rxjs";
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatButtonModule, MatIconModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomeComponent implements OnInit, AfterContentInit, AfterViewInit{
+export class HomeComponent implements OnInit {
 
   bookings: Observable<Booking[]> = of([]);
   public userId: string = "";
@@ -23,24 +32,27 @@ export class HomeComponent implements OnInit, AfterContentInit, AfterViewInit{
 
   constructor (
     private bookingService: BookingService,
+    private ch: ChangeDetectorRef,
   ) {}
 
   public async ngOnInit() {
     this.userId = sessionStorage.getItem('user') ?? 'Error in fetching user id';
 
     this.bookings = await this.bookingService.getBookings(this.userId);
-
+    this.bookings.subscribe(f=>{
+      this.ch.detectChanges();
+    });
     // await this.bookings.forEach(gg => {
     //     gg.forEach(ggg => {
-    //       // this.bookingsFetched.push(ggg);
+    //       this.bookingsFetched.push(ggg);
     //       console.log('What is this?', ggg);
     //     })
     //   }
     // )
 
-    // this.bookingService.getBookings(this.userId).subscribe(b=> {
+    // await this.bookingService.getBookings(this.userId).subscribe(b=> {
     //   b.forEach(g => {
-    //     // console.log('g',g);
+    //     console.log('booking',g);
     //     this.bookingsFetched.push(g);
     //   })
     // });
@@ -54,13 +66,17 @@ export class HomeComponent implements OnInit, AfterContentInit, AfterViewInit{
 
   }
 
-  ngAfterContentInit() {
-    // if(this.bookingsFetched.toString() === ''){ // try fetching again
-    //   this.bookings = this.bookingService.getBookings(this.userId);
-    //   console.log('g',this.bookingsFetched);
-    // }
+  public onDeleteClick(booking: Booking) {
+    this.bookingService
+      .deleteBooking(booking.id).subscribe(async res => {
+      this.bookings = await this.bookingService.getBookings(this.userId);
+      this.ch.detectChanges();
+    });
   }
-  ngAfterViewInit() {
+
+  public onEditClick(booking: Booking) {
+    this.bookingService.updateBooking(booking,booking.id).subscribe();
+
   }
 
 }

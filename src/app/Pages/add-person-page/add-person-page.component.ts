@@ -41,17 +41,13 @@ export class AddPersonPageComponent {
 
   public submitPerson(formPers: FormGroup) {
 
-
     const placeholderID: any = '';
-    const placeholderPW: any = '';
 
     const fname = formPers.get('firstName')?.value;
     const lname = formPers.get('lastName')?.value;
     const pw = formPers.get('password')?.value;
 
     const user: User = {userId: placeholderID, firstName: fname, lastName: lname, password: pw, isAdmin: false};
-
-
 
     // call service
     this.userService.postUser(user)
@@ -65,7 +61,6 @@ export class AddPersonPageComponent {
         });
       });
 
-    // this.router.navigate(['app/user']);
   }
 
 }

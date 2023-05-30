@@ -1,38 +1,60 @@
 
 
 <div style="width: 600px">
-  Aktive bruger ID: {{userId}}
+<!--  Aktive bruger ID: {{userId}}-->
 
-<!--  <div *ngIf="bookings|async as usersList" >-->
-<!--    <div *ngFor="let booking of usersList" class="d-flex align-items-baseline">-->
+  <div *ngIf="bookings|async as bookings" >
+<!--    <div *ngFor="let booking of bookings" class="d-flex align-items-baseline">-->
 <!--      <p> Booking: {{booking.title}} {{booking.startDate}} (ID: {{booking.endDate}})</p>-->
-
 <!--    </div>-->
-<!--  </div>-->
+
+  <h2>Dine bookninger</h2>
+    <table style="width: 100%">
+      <tbody *ngFor="let booking of bookings">
+      <tr>
+        <td>Title: {{booking.title}}</td>
+        <td>Start: {{booking.startDate}}</td>
+        <td>End: {{booking.endDate}}</td>
+        <td>Description: {{booking.description}}</td>
+        <td>
+          <button
+            mat-icon-button
+            color="accent"
+            class="rounded-3 m-1"
+            (click)="onEditClick(booking)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>        <td>
+          <button
+            mat-icon-button
+            color="warn"
+            class="rounded-3 m-1"
+            (click)="onDeleteClick(booking)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+
+
+      </tr>
+      </tbody>
+
+
+    </table>
+
+  </div>
+
+<!--  <ng-container *ngFor="let b of bookingsFetched">-->
+<!--    Booking {{b.id}}-->
+
+<!--  </ng-container>-->
 
 
 <!--      <div *ngFor="let b of bookingsFetched" class="d-flex align-items-baseline">-->
 <!--        <p> Booking: {{b.title}} {{b.startDate}} (ID: {{b.endDate}})</p>-->
 
-<!--      </div> -->
+<!--      </div>-->
 
 
-<!--  <table>-->
-<!--    <caption>Dine bookninger</caption>-->
-<!--    ?-->
-<!--    <tbody *ngFor="let b of bookingsFetched">-->
-<!--      <tr>-->
-<!--        <td>Title: {{b.title}}</td>-->
-<!--        <td>Start: {{b.startDate}}</td>-->
-<!--        <td>End: {{b.endDate}}</td>-->
-<!--        <td>Description: {{b.description}}</td>-->
-
-
-<!--      </tr>-->
-<!--    </tbody>-->
-
-
-<!--  </table>-->
 
 </div>
 

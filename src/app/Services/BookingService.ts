@@ -39,11 +39,29 @@ export class BookingService {
   }
 
   getBookings(userId: string): Observable<Booking[]> {
-    console.log('Get bookings for user called');
     const url = 'https://localhost:7041/bookings/'+userId;
     return this.http.get<Booking[]>(url) //
+      .pipe(
+        catchError(this.error.handleError<Booking[]>('deleteBookings',[]))
+      )
+  }
+
+  deleteBooking(bookingId: string): Observable<unknown> {
+    console.log('Delete booking');
+    const url = 'https://localhost:7041/booking/'+bookingId;
+    return this.http.delete(url) //
       .pipe(
         catchError(this.error.handleError<Booking[]>('getBookings',[]))
       )
   }
+
+  updateBooking(booking: Booking, bookingId: string): Observable<Booking[]> {
+    const url = 'https://localhost:7041/booking/'+bookingId;
+    return this.http.put<Booking[]>(url, booking, httpOptions) //
+      .pipe(
+        catchError(this.error.handleError<Booking[]>('putBookings',[]))
+      )
+  }
+
+
 }

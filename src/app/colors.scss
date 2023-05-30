@@ -1,6 +1,7 @@
 @use '@angular/material' as mat;
 
 $my-green: #8DC63F;
+$my-yellow: #ffdd00;
 
 $my-primary: mat.define-palette(mat.$indigo-palette, 500);
 $my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
