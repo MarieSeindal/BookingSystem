@@ -1,6 +1,4 @@
 import {
-  AfterContentInit, AfterViewInit,
-  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   Input,
@@ -14,16 +12,28 @@ import {MatInputModule} from '@angular/material/input';
 import {MatOptionModule} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Booking} from '../booking/booking';
 import {BookingService} from '../../Services/BookingService';
 import {ToastrService} from 'ngx-toastr';
 import {dateType} from '../booking/booking.component';
+import { parse } from 'date-fns';
 
 @Component({
   selector: 'booking-edit',
   standalone: true,
-	imports: [CommonModule, MatButtonModule, MatDatepickerModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatSlideToggleModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatSlideToggleModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
   templateUrl: './booking-edit.component.html',
   styleUrls: ['./booking-edit.component.scss'],
 })
@@ -35,9 +45,10 @@ export class BookingEditComponent implements OnInit {
     this.fillForm(booking);
   };
 
-  public selectedRoom = '2';
-
-  public _allDay = false;
+  public _allDay = false
+  public set allDay(b: boolean){
+    this._allDay = b;
+  };
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -50,26 +61,34 @@ export class BookingEditComponent implements OnInit {
   formGroup = this._formBuilder.group({
     title: [''],
     date: ['', Validators.required],
-    duration: [1, Validators.required],
+    duration: ['', Validators.required],
     time: ['', Validators.required],
-    room: ['', Validators.required],
+    room: ['0', Validators.required],
     description: [''],
-    allDay: [''],
+    allDay: [false],
   });
 
   public fillForm(booking: Booking) {
 
-    this.formGroup.reset();
+    this.formGroup.reset(); // clean up before writing
 
-    // this.formGroup.patchValue()
+    const formatString = 'yyyy-MM-DDTHH:mm:ss';
+    // parse(booking.startDate,formatString);
 
+    // const d =
+
+    console.log('time start date:', booking.startDate);
+    console.log('duration:', booking.duration);
 
     this.formGroup.controls['title'].setValue(booking.title);
     this.formGroup.controls['date'].setValue(booking.startDate.toString());
-    this.formGroup.controls['duration'].setValue(booking.duration);
-    this.formGroup.controls['time'].setValue(booking.startDate.toString());
+    this.formGroup.controls['duration'].setValue('5');
+    this.formGroup.controls['time'].setValue('22:22');
     this.formGroup.controls['room'].setValue(booking.roomId.toString());
     this.formGroup.controls['description'].setValue(booking.description);
+    this.formGroup.controls['allDay'].setValue(booking.allDay);
+
+    this._allDay = booking.allDay;
 
   }
 

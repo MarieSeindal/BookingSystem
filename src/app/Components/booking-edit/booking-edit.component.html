@@ -30,8 +30,8 @@
   <mat-slide-toggle
     class="mb-2"
     [color]="'primary'"
-    [checked]="_allDay"
-    (toggleChange)="switchAllDay()">
+
+>
     Hele dagen
   </mat-slide-toggle>
 
@@ -51,7 +51,7 @@
   <!--    <h5>Lokation</h5>-->
   <mat-form-field>
     <mat-label>Vælg en lokation</mat-label>
-    <mat-select formControlName="room" [(value)]="selectedRoom">
+    <mat-select formControlName="room">
       <mat-option>Ingen</mat-option>
       <mat-option value="1">Rum 1</mat-option>
       <mat-option value="2">Rum 2</mat-option>
