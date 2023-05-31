@@ -66,7 +66,6 @@ export class UserService {
   }
 
   getBookings(userId: string): Observable<Booking[]> {
-    console.log('Get bookings for user called');
     const url = 'https://localhost:7041/bookings/'+userId;
     return this.http.get<Booking[]>(url) //
       .pipe(

@@ -47,7 +47,6 @@ export class BookingService {
   }
 
   deleteBooking(bookingId: string): Observable<unknown> {
-    console.log('Delete booking');
     const url = 'https://localhost:7041/booking/'+bookingId;
     return this.http.delete(url) //
       .pipe(

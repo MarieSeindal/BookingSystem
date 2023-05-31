@@ -12,11 +12,13 @@ import {BookingService} from "../../Services/BookingService";
 import {Observable, of} from "rxjs";
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import {RouterLink} from '@angular/router';
+import {BookingEditComponent} from '../../Components/booking-edit/booking-edit.component';
 
 @Component({
   selector: 'home',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, MatButtonModule, MatIconModule, RouterLink, BookingEditComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -26,6 +28,7 @@ export class HomeComponent implements OnInit {
   bookings: Observable<Booking[]> = of([]);
   public userId: string = "";
   public bookingsFetched: Booking[] = [];
+  public bookingForEdit: Booking | undefined;
 
 
   protected readonly sessionStorage = sessionStorage;
@@ -42,28 +45,6 @@ export class HomeComponent implements OnInit {
     this.bookings.subscribe(f=>{
       this.ch.detectChanges();
     });
-    // await this.bookings.forEach(gg => {
-    //     gg.forEach(ggg => {
-    //       this.bookingsFetched.push(ggg);
-    //       console.log('What is this?', ggg);
-    //     })
-    //   }
-    // )
-
-    // await this.bookingService.getBookings(this.userId).subscribe(b=> {
-    //   b.forEach(g => {
-    //     console.log('booking',g);
-    //     this.bookingsFetched.push(g);
-    //   })
-    // });
-
-    console.log('book raw',this.bookings);
-    console.log('f',this.bookingsFetched);
-    console.log('f2',typeof this.bookingsFetched,'"',this.bookingsFetched.toString(),'"');
-
-
-    // this.bookingsFetched.push( this.bookings);
-
   }
 
   public onDeleteClick(booking: Booking) {
@@ -75,7 +56,7 @@ export class HomeComponent implements OnInit {
   }
 
   public onEditClick(booking: Booking) {
-    this.bookingService.updateBooking(booking,booking.id).subscribe();
+    this.bookingForEdit = booking;
 
   }
 

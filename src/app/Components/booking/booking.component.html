@@ -1,14 +1,5 @@
 
 
-<!--  &lt;!&ndash; Date picker &ndash;&gt;-->
-<!--  <div class="me-3">-->
-<!--    <mat-card-->
-<!--      style="width: 300px">-->
-<!--      <mat-calendar [(selected)]="selectedDate"></mat-calendar>-->
-<!--    </mat-card>-->
-<!--    <p>Selected date: {{selectedDate?.toDateString()}}</p>-->
-<!--  </div>-->
-
 <div class="">
   <!-- NOT USED, For error hint: https://www.educba.com/angular-material-form-validation/
   NOT USED, more on validation https://angular.io/guide/form-validation -->
@@ -23,9 +14,6 @@
   <mat-form-field appearance="fill">
     <mat-label>Title</mat-label>
     <input matInput placeholder="Enter title for booking" formControlName="title">
-<!--    <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">-->
-<!--      <mat-icon>close</mat-icon>-->
-<!--    </button>-->
   </mat-form-field>
 
   <!-- Date -->
@@ -35,7 +23,7 @@
       <input
         matInput [matDatepicker]="picker"
         formControlName="date">
-<!--      <mat-hint>MM/DD/YYYY</mat-hint>-->
+      <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
       <mat-error>Venligst vælg en dato</mat-error>

@@ -6,4 +6,6 @@ export interface Booking {
   "endDate": Date,
   "roomId": number,
   "description": string
+  "allDay": boolean
+  "duration": number
 }

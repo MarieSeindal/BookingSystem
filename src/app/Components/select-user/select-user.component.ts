@@ -33,6 +33,10 @@ export class SelectUserComponent implements OnInit{
     this.router.navigate(['app/home']);
   }
 
+  onRefreshClick() {
+    window.location.reload();
+  }
+
 
 
 }

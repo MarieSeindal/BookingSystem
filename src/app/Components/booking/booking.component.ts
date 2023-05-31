@@ -39,7 +39,6 @@ export type dateType = 'start' | 'end';
 export class BookingComponent {
 
   protected _allDay = false;
-  public allDay = false;
   public value ='';
   public selectedDate: Date | null = new Date();
   public formDate = new FormControl(this.selectedDate);
@@ -52,6 +51,7 @@ export class BookingComponent {
     time: ['', Validators.required],
     room: ['', Validators.required],
     description: [''],
+    allDay: [false],
     // acceptTerms: ['', Validators.requiredTrue],
   });
 
@@ -87,7 +87,7 @@ export class BookingComponent {
     private _formBuilder: FormBuilder,
     private dateAdapter: DateAdapter<Date>,
     private toast: ToastrService,
-  public bookingService: BookingService,
+    public bookingService: BookingService,
   ){
     this.dateAdapter.setLocale('da');
   }
@@ -109,6 +109,8 @@ export class BookingComponent {
 
     const temp: any = 'temp';
 
+    console.log('TEST:',formGroup.controls['date'].value, formGroup.controls['time'].value);
+
     const booking: Booking = {
       id: temp,
       userId: temp,
@@ -117,29 +119,33 @@ export class BookingComponent {
       endDate: this.convertDate(formGroup.controls['date'].value, formGroup.controls['time'].value, "end", formGroup.controls['duration'].value),
       roomId: formGroup.controls['room'].value, //Math.round(Math.random()*100), // for evt test purpose
       description: formGroup.controls['description'].value,
+      allDay: formGroup.controls['allDay'].value,
+      duration: formGroup.controls['duration'].value,
     }
 
 
     const userID: any = sessionStorage.getItem('user') ?? 'ERROR in userID';
 
-    this.bookingService.postBooking(booking, userID)
-      .subscribe((res) => {
-      console.log('response form post booking',res);
-      // window.location.reload();
+    if (formGroup.valid) {
+      this.bookingService.postBooking(booking, userID)
+        .subscribe((res) => {
+          console.log('response form post booking',res);
+          // window.location.reload();
 
-      this.toast.success('Booking created','Success', {
-        timeOut: 2000,
-        disableTimeOut: false,
-      });
-    });
-
-    // alert(JSON.stringify(formGroup.value, null, 2));
+          this.toast.success('Booking oprettet','Success', {
+            timeOut: 2000,
+            disableTimeOut: false,
+          });
+        });
+    } else {
+      this.toast.info('Udfyld venligst de obligatoriske felter')
+    }
   }
 
   public switchAllDay(){
     this.isDisabled = !this._allDay;
-    this.allDay = !this.allDay;
   }
+
 
   public convertDate(date: Date, time: string, startOrEnd: dateType, duration?: number) {
 

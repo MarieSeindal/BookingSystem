@@ -1,16 +1,22 @@
 
+<div class="d-flex flex-row">
 
-<div style="width: 600px">
+<div style="width: 600px" class="m-5">
 <!--  Aktive bruger ID: {{userId}}-->
 
-  <div *ngIf="bookings|async as bookings" >
+  <div *ngIf="bookings|async as bookingList" >
 <!--    <div *ngFor="let booking of bookings" class="d-flex align-items-baseline">-->
 <!--      <p> Booking: {{booking.title}} {{booking.startDate}} (ID: {{booking.endDate}})</p>-->
 <!--    </div>-->
 
   <h2>Dine bookninger</h2>
+
+    <p *ngIf="bookingList.length < 1" class="d-flex align-items-baseline">
+      Du har ingen bookninger. Gå til <button mat-button style="color: #8DC63F" routerLink="/app/booking"><u><a>Booking</a></u></button> for at oprette en bookning.
+    </p>
+
     <table style="width: 100%">
-      <tbody *ngFor="let booking of bookings">
+      <tbody *ngFor="let booking of bookingList">
       <tr>
         <td>Title: {{booking.title}}</td>
         <td>Start: {{booking.startDate}}</td>
@@ -58,4 +64,14 @@
 
 </div>
 
+<div style="width: 600px" class="m-5" *ngIf="bookingForEdit !== undefined">
+
+    <booking-edit
+    [booking]="bookingForEdit"
+    >
+
+    </booking-edit>
+
+</div>
+</div>
 <!-- your bookings? Quick shortcut to book a room? -->
