@@ -5,19 +5,4 @@
     style="width: 500px">
   </booking>
 
-  <div *ngIf="booking|async as book"class="m-5">
-    Booking
-    <!--  <div *ngFor="let a of person|async">-->
-    <!--    <pre *ngIf="(p|json).length > 0 ">-->
-    <!--      {{p|json}}-->
-    <!--    </pre>-->
-    <!--  </div>-->
-
-    <!-- Single version shows person, but generates an [] if service fails-->
-    <pre *ngIf="book.length !== 0">
-      {{book|json}}
-    </pre>
-
-  </div>
-
 </div>

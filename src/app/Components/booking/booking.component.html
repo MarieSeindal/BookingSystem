@@ -1,8 +1,6 @@
 
 
 <div class="">
-  <!-- NOT USED, For error hint: https://www.educba.com/angular-material-form-validation/
-  NOT USED, more on validation https://angular.io/guide/form-validation -->
 
   <form
     [formGroup]="formGroup"
@@ -10,14 +8,12 @@
     class="d-flex flex-column"
     style="min-width: 300px">
   <!-- Title -->
-<!--  <h5>Titel</h5>-->
   <mat-form-field appearance="fill">
     <mat-label>Title</mat-label>
     <input matInput placeholder="Enter title for booking" formControlName="title">
   </mat-form-field>
 
   <!-- Date -->
-<!--    <h5>Dato</h5>-->
     <mat-form-field appearance="fill">
       <mat-label>Vælg en dato</mat-label>
       <input
@@ -31,7 +27,6 @@
     </mat-form-field>
 
   <!-- Time / all day -->
-<!--    <h5 class="mt-3">Klokkeslæt</h5>-->
     <mat-slide-toggle
       class="mb-2"
       [color]="'primary'"
@@ -53,7 +48,6 @@
 
   <!-- Meeting room selection -->
     <!-- Location -->
-<!--    <h5>Lokation</h5>-->
     <mat-form-field>
       <mat-label>Vælg en lokation</mat-label>
       <mat-select formControlName="room">
@@ -68,10 +62,9 @@
       <mat-error> Venligst vælg en lokation </mat-error>
     </mat-form-field>
 
-    <!-- Room info from FM -->
+    <!-- Room info from FM - not implemented -->
 
   <!-- Description -->
-<!--    <h5>Beskrivelse</h5>-->
     <mat-form-field appearance="fill">
     <mat-label>Beskrivelse</mat-label>
     <textarea matInput formControlName="description"></textarea>

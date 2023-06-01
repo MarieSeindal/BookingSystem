@@ -22,8 +22,6 @@ import {AddPersonPageComponent} from "./Pages/add-person-page/add-person-page.co
 import {ShowPersonComponent} from "./Pages/add-person-page/show-person/show-person.component";
 import {AppLayoutComponent} from './app-layout/app-layout.component';
 import {LoginComponent} from './Pages/login/login.component';
-import {JwtModule} from '@auth0/angular-jwt';
-import {AuthModule} from '@auth0/auth0-angular';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { ToastrModule } from 'ngx-toastr';
@@ -58,14 +56,12 @@ export function tokenGetter() {
           {path: 'home', component: HomeComponent},
           {path: '', redirectTo: 'home', pathMatch: 'full'},
           {path: 'calendar', component: CalendarPageComponent},
-          // {path: 'booking/:userId', component: BookingComponent},
           {path: 'booking', component: BookingPageComponent},
           {path: 'weather', component: WeatherTestComponent},
           {path: 'ng-tutorial', component: NgTutorial},
           {path: 'documentation', component: DocumentationComponent},
           {path: 'user', component: AddPersonPageComponent},
           {path: 'user/:userId', component: ShowPersonComponent}, // https://stackblitz.com/github/rangle/angular-book-examples/tree/feat-programmatic-route-navigation?file=src%2Fapp%2Fapp.component.html
-          // {path: 'calendar/:userId', component: CalendarComponent},
         ]},
 
       {path: '**', component: NotFoundComponent}, // for any other not defined paths user may enter.

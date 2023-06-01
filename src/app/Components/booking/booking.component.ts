@@ -12,10 +12,8 @@ import {MatCardModule} from '@angular/material/card';
 import {Booking} from "./booking";
 import {BookingService} from "../../Services/BookingService";
 import {ToastrService} from "ngx-toastr";
-import {UserService} from "../../Services/UserService";
 
 export type dateType = 'start' | 'end';
-
 
 @Component({
   selector: 'booking',
@@ -39,10 +37,6 @@ export type dateType = 'start' | 'end';
 export class BookingComponent {
 
   protected _allDay = false;
-  public value ='';
-  public selectedDate: Date | null = new Date();
-  public formDate = new FormControl(this.selectedDate);
-  public startDate = new FormControl(new Date());
 
   formGroup = this._formBuilder.group({
     title: [''],
@@ -52,9 +46,7 @@ export class BookingComponent {
     room: ['', Validators.required],
     description: [''],
     allDay: [false],
-    // acceptTerms: ['', Validators.requiredTrue],
   });
-
 
   public set isDisabled(value: boolean) { // https://angular.io/api/forms/FormControl#reset & https://stackoverflow.com/questions/50220643/disable-angular-5-input-fields-correct-way
     this._allDay = value;
@@ -68,20 +60,6 @@ export class BookingComponent {
       this.formGroup.controls['duration'].enable();
     }
   }
-  /* Not used, but good to show manipulation of form-group */
-  // public myError = (controlName: string, errorName: string) =>{
-  //
-  //   switch (controlName) {
-  //     case 'room':
-  //       return this.formGroup.controls.room.hasError('Please select room');
-  //   }
-  //
-  //   for (let controlsKey in this.formGroup.controls) {
-  //     console.log(controlsKey, 'c key');
-  //   }
-  //
-  //   return null;
-  // }
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -92,20 +70,7 @@ export class BookingComponent {
     this.dateAdapter.setLocale('da');
   }
 
-  // public dateToForm() { // Not used
-  //   this.formDate = new FormControl(this.selectedDate);
-  //   return this.formDate;
-  // }
-  //
-  // public formToDate(){
-  //   this.selectedDate = this.formDate? this.formDate.value : this.selectedDate;
-  //   return this.selectedDate;
-  // }
-
   public submitBooking(formGroup: FormGroup){
-
-    // Check booking info
-    // let booking: any;
 
     const temp: any = 'temp';
 
@@ -134,7 +99,6 @@ export class BookingComponent {
       this.bookingService.postBooking(booking, userID)
         .subscribe((res) => {
           console.log('response form post booking',res);
-          // window.location.reload();
 
           this.toast.success('Booking oprettet','Success', {
             timeOut: 2000,
@@ -149,7 +113,6 @@ export class BookingComponent {
   public switchAllDay(){
     this.isDisabled = !this._allDay;
   }
-
 
   public convertDate(date: Date, time: string, startOrEnd: dateType, duration?: number) {
 

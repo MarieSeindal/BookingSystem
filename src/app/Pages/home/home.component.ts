@@ -49,7 +49,6 @@ export class HomeComponent implements OnInit {
 
   public async refreshList() {
     this.bookings = await this.bookingService.getBookings(this.userId);
-
   }
 
   public onDeleteClick(booking: Booking) {
@@ -62,7 +61,5 @@ export class HomeComponent implements OnInit {
 
   public onEditClick(booking: Booking) {
     this.bookingForEdit = booking;
-
   }
-
 }

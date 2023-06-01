@@ -22,7 +22,6 @@ export class PersonTestService {
     private http: HttpClient,
   ) {}
 
-  /* GET person from the server from db */
   getPerson(): Observable<Person[]> {
     return this.http.get<Person[]>(this.connectURL)
       .pipe(

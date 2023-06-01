@@ -22,7 +22,6 @@ export class BookingService {
     private http: HttpClient,
   ) {}
 
-  /* GET Booking from the service from db */
   getBooking(): Observable<Booking[]> {
     return this.http.get<Booking[]>('https://localhost:7041/booking'+'/1') // 1 is a test id, need to be replaced later todo;
       .pipe(
@@ -55,7 +54,6 @@ export class BookingService {
   }
 
   updateBooking(booking: Booking, bookingId: string): Observable<Booking[]> {
-    console.log('update booking', bookingId);
     const url = 'https://localhost:7041/booking/'+bookingId;
     return this.http.put<Booking[]>(url, booking, httpOptions) //
       .pipe(

@@ -18,7 +18,6 @@ export class SelectUserComponent implements OnInit{
 
   users: Observable<User[]> = of([]);
 
-
   constructor(
     public userService: UserService,
     private router: Router,
@@ -36,7 +35,4 @@ export class SelectUserComponent implements OnInit{
   onRefreshClick() {
     window.location.reload();
   }
-
-
-
 }

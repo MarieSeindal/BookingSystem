@@ -9,7 +9,6 @@ import {BookingService} from '../../Services/BookingService';
 import {Observable, of} from 'rxjs';
 import {Booking} from '../../Components/booking/booking';
 
-
 @Component({
   selector: 'booking-page',
   standalone: true,

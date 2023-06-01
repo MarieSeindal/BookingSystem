@@ -2,7 +2,7 @@ import {
   ChangeDetectorRef,
   Component, EventEmitter,
   Input,
-  OnInit, Output
+  Output
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
@@ -58,8 +58,6 @@ export class BookingEditComponent {
     private _formBuilder: FormBuilder,
     private _bookingService: BookingService,
     private toast: ToastrService,
-    private ch: ChangeDetectorRef,
-
   ) {}
 
   formGroup = this._formBuilder.group({
