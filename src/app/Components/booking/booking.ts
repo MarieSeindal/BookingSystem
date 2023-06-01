@@ -7,5 +7,4 @@ export interface Booking {
   "roomId": number,
   "description": string
   "allDay": boolean
-  "duration": number
 }

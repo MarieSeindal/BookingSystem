@@ -1,7 +1,7 @@
 
 <div class="d-flex flex-row">
 
-<div style="width: 600px" class="m-5">
+<div style="width: 600px" class="m-5" id="bookingList">
 <!--  Aktive bruger ID: {{userId}}-->
 
   <div *ngIf="bookings|async as bookingList" >
@@ -68,6 +68,7 @@
 
     <booking-edit
     [booking]="bookingForEdit"
+    (updatedBooking)="refreshList()"
     >
 
     </booking-edit>

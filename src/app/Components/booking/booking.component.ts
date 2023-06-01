@@ -109,7 +109,10 @@ export class BookingComponent {
 
     const temp: any = 'temp';
 
-    console.log('TEST:',formGroup.controls['date'].value, formGroup.controls['time'].value);
+    console.log('ALLDAY:',formGroup.controls['allDay'].value, formGroup.controls['time'].value);
+
+    console.log('Start',this.convertDate(formGroup.controls['date'].value, formGroup.controls['time'].value, "start"));
+    console.log('End',this.convertDate(formGroup.controls['date'].value, formGroup.controls['time'].value, "end", formGroup.controls['duration'].value));
 
     const booking: Booking = {
       id: temp,
@@ -119,9 +122,10 @@ export class BookingComponent {
       endDate: this.convertDate(formGroup.controls['date'].value, formGroup.controls['time'].value, "end", formGroup.controls['duration'].value),
       roomId: formGroup.controls['room'].value, //Math.round(Math.random()*100), // for evt test purpose
       description: formGroup.controls['description'].value,
-      allDay: formGroup.controls['allDay'].value,
-      duration: formGroup.controls['duration'].value,
+      allDay: this._allDay,
     }
+
+    console.log('Saved booking object', booking);
 
 
     const userID: any = sessionStorage.getItem('user') ?? 'ERROR in userID';
@@ -150,14 +154,23 @@ export class BookingComponent {
   public convertDate(date: Date, time: string, startOrEnd: dateType, duration?: number) {
 
     if (this._allDay) {
+      console.log('allday in f', this._allDay);
       if (startOrEnd === "end"){ // if all day and the end date is being defined
         return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59);
       }
       return date; // if all day, then no string = return the date with no changes.
     }
     const timeArray = time.split(':');
+
     if (startOrEnd === "end")  {
-      return new Date(date.getFullYear(), date.getMonth(), date.getDate(), Number(timeArray[0]), Number(timeArray[1]));
+      if (duration !== null && duration !== undefined) {
+
+      }
+      const extraMinutes = duration? duration%60 : 0;
+      const extraHours = duration? Math.trunc(duration/60) : 0;
+      console.log('extra hours and minutes',extraHours,extraMinutes);
+
+      return new Date(date.getFullYear(), date.getMonth(), date.getDate(), Number(timeArray[0])+extraHours, Number(timeArray[1])+extraMinutes);
     }
     return new Date(date.getFullYear(), date.getMonth(), date.getDate(), Number(timeArray[0]), Number(timeArray[1]));
   }

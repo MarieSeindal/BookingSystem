@@ -55,6 +55,7 @@ export class BookingService {
   }
 
   updateBooking(booking: Booking, bookingId: string): Observable<Booking[]> {
+    console.log('update booking', bookingId);
     const url = 'https://localhost:7041/booking/'+bookingId;
     return this.http.put<Booking[]>(url, booking, httpOptions) //
       .pipe(

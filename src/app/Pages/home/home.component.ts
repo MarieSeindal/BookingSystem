@@ -47,6 +47,11 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  public async refreshList() {
+    this.bookings = await this.bookingService.getBookings(this.userId);
+
+  }
+
   public onDeleteClick(booking: Booking) {
     this.bookingService
       .deleteBooking(booking.id).subscribe(async res => {

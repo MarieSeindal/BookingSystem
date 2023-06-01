@@ -1,8 +1,8 @@
 import {
   ChangeDetectorRef,
-  Component,
+  Component, EventEmitter,
   Input,
-  OnInit
+  OnInit, Output
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
@@ -38,13 +38,17 @@ import { parse } from 'date-fns';
   styleUrls: ['./booking-edit.component.scss'],
 })
 
-export class BookingEditComponent implements OnInit {
+export class BookingEditComponent {
 
   @Input()
   public set booking(booking: Booking) {
     this.fillForm(booking);
   };
 
+  @Output()
+  public updatedBooking = new EventEmitter<boolean>();
+
+  public id = '';
   public _allDay = false
   public set allDay(b: boolean){
     this._allDay = b;
@@ -72,47 +76,23 @@ export class BookingEditComponent implements OnInit {
 
     this.formGroup.reset(); // clean up before writing
 
-    const formatString = 'yyyy-MM-DDTHH:mm:ss';
-    // parse(booking.startDate,formatString);
+    this.id = booking.id;
 
-    // const d =
+    const formatString = 'yyyy-MM-ddHH:mm:ss';
+    const tempStartDate = parse(booking.startDate.toString().replace('T',''),formatString,new Date());
+    const tempEndDate = parse(booking.endDate.toString().replace('T',''),formatString,new Date());
 
-    console.log('time start date:', booking.startDate);
-    console.log('duration:', booking.duration);
+    const timeduration = (tempEndDate.getTime() - tempStartDate.getTime())/(1000*60);
 
     this.formGroup.controls['title'].setValue(booking.title);
     this.formGroup.controls['date'].setValue(booking.startDate.toString());
-    this.formGroup.controls['duration'].setValue('5');
-    this.formGroup.controls['time'].setValue('22:22');
+    this.formGroup.controls['duration'].setValue(timeduration.toString());
+    this.formGroup.controls['time'].setValue(this.makeTimeString(tempStartDate));
     this.formGroup.controls['room'].setValue(booking.roomId.toString());
     this.formGroup.controls['description'].setValue(booking.description);
     this.formGroup.controls['allDay'].setValue(booking.allDay);
+    this.isDisabled = booking.allDay;
 
-    this._allDay = booking.allDay;
-
-  }
-
-  ngOnInit() {
-
-  }
-
-  ngAfterViewInit() {
-
-    if (this.booking !== undefined && this.booking.startDate !== undefined && this.booking.endDate !== undefined) {
-
-      console.log(this.booking?.endDate?.getTime());
-
-      const time = this.booking.startDate.getHours()+':'+this.booking.startDate.getMinutes();
-
-      console.log(' Time', time);
-      console.log(this._allDay, '!==', this.booking.allDay);
-      if (this._allDay !== this.booking.allDay) {
-        this.switchAllDay();
-      }
-
-
-
-    }
   }
 
   public set isDisabled(value: boolean) { // https://angular.io/api/forms/FormControl#reset & https://stackoverflow.com/questions/50220643/disable-angular-5-input-fields-correct-way
@@ -132,37 +112,55 @@ export class BookingEditComponent implements OnInit {
     this.isDisabled = !this._allDay;
   }
 
-  public submitBooking(formGroup: FormGroup){
+  public makeTimeString(date: Date) {
+    let minutes: string = '';
+    let hours: string = '';
 
-    // Check booking info
-    // let booking: any;
+    if (date.getMinutes() < 10) {
+      minutes = '0'+date.getMinutes()
+    } else {
+      minutes = date.getMinutes().toString();
+    }
+    if (date.getHours() < 10) {
+      hours = '0'+date.getHours()
+    } else {
+      hours = date.getHours().toString();
+    }
+
+    return hours+':'+minutes;
+  }
+
+  public submitBooking(formGroup: FormGroup){
 
     const temp: any = 'temp';
 
     console.log('TEST:',formGroup.controls['date'].value, formGroup.controls['time'].value);
 
+    const userID: any = sessionStorage.getItem('user') ?? 'ERROR in userID';
+
     const booking: Booking = {
-      id: temp,
+      id: this.id,
       userId: temp,
       title: formGroup.controls['title'].value,
       startDate: this.convertDate(formGroup.controls['date'].value, formGroup.controls['time'].value, "start"),
       endDate: this.convertDate(formGroup.controls['date'].value, formGroup.controls['time'].value, "end", formGroup.controls['duration'].value),
-      roomId: formGroup.controls['room'].value, //Math.round(Math.random()*100), // for evt test purpose
+      roomId: Number(formGroup.controls['room'].value), //Math.round(Math.random()*100), // for evt test purpose
       description: formGroup.controls['description'].value,
-      allDay: formGroup.controls['allDay'].value,
-      duration: formGroup.controls['duration'].value,
+      allDay: this._allDay,
     }
 
+    console.log('Booking to be updted', booking);
 
-    const userID: any = sessionStorage.getItem('user') ?? 'ERROR in userID';
+
 
     if (formGroup.valid) {
       this._bookingService.updateBooking(booking,booking.id).subscribe(res => {
 
         console.log('response form update booking',res);
         // window.location.reload();
+        this.updatedBooking.emit(true); // telling parent that the update happened
 
-        this.toast.success('Booking oprettet','Success', {
+        this.toast.success('Booking opdateret','Success', {
           timeOut: 2000,
           disableTimeOut: false,
         });
@@ -175,20 +173,32 @@ export class BookingEditComponent implements OnInit {
 
   public convertDate(date: Date, time: string, startOrEnd: dateType, duration?: number) {
 
+
+    const formatString = 'yyyy-MM-ddHH:mm:ss';
+    const tempDate = parse(date.toString().replace('T',''),formatString,new Date());
+    date = tempDate;
+
+    console.log('Dato debug',typeof date);
     if (this._allDay) {
+      console.log('allday in f', this._allDay);
       if (startOrEnd === "end"){ // if all day and the end date is being defined
         return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59);
       }
       return date; // if all day, then no string = return the date with no changes.
     }
     const timeArray = time.split(':');
+
     if (startOrEnd === "end")  {
-      return new Date(date.getFullYear(), date.getMonth(), date.getDate(), Number(timeArray[0]), Number(timeArray[1]));
+      if (duration !== null && duration !== undefined) {
+
+      }
+      const extraMinutes = duration? duration%60 : 0;
+      const extraHours = duration? Math.trunc(duration/60) : 0;
+      console.log('extra hours and minutes',extraHours,extraMinutes);
+
+      return new Date(date.getFullYear(), date.getMonth(), date.getDate(), Number(timeArray[0])+extraHours, Number(timeArray[1])+extraMinutes);
     }
     return new Date(date.getFullYear(), date.getMonth(), date.getDate(), Number(timeArray[0]), Number(timeArray[1]));
-  }
-  compareCategoryObjects(object1: any, object2: any) {
-    return object1 && object2 && object1.id == object2.id;
   }
   protected readonly Date = Date;
 }
