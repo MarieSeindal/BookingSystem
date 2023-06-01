@@ -3,14 +3,12 @@
 
 <div *ngIf="users|async as usersList" >
   <div *ngFor="let user of usersList" class="d-flex align-items-baseline">
-    <p> Bruger: {{user.firstName}} {{user.lastName}} (ID: {{user.userId}})</p>
 
     <button
       mat-raised-button
-      color="primary"
       class="rounded-3 m-1"
       (click)="onUserClick($event, user)">
-      Choose
+      {{user.firstName}} {{user.lastName}} (ID: {{user.userId}})
     </button>
 
   </div>
