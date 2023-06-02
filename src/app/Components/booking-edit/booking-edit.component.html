@@ -7,17 +7,17 @@
   <!-- Title -->
   <mat-form-field appearance="fill">
     <mat-label>Title</mat-label>
-    <input matInput placeholder="Enter title for booking" formControlName="title">
+    <input id="cy_title" matInput placeholder="Enter title for booking" formControlName="title">
   </mat-form-field>
 
   <!-- Date -->
   <mat-form-field appearance="fill">
     <mat-label>Vælg en dato</mat-label>
     <input
-      matInput [matDatepicker]="picker"
+      matInput id="cy_date" [matDatepicker]="picker"
       formControlName="date" >
     <mat-hint>MM/DD/YYYY</mat-hint>
-    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker-toggle id="cy_calendarButton" matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
     <mat-error>Venligst vælg en dato</mat-error>
 
@@ -25,6 +25,7 @@
 
   <!-- Time / all day -->
   <mat-slide-toggle
+    id="cy_allDay"
     formControlName="allDay"
     class="mb-2"
     [color]="'primary'"
@@ -35,12 +36,12 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Klokkeslæt</mat-label>
-    <input type="time" matInput formControlName="time">
+    <input id="cy_time" type="time" matInput formControlName="time">
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Varighed i minutter</mat-label>
-    <input type="number" matInput formControlName="duration" step="5">
+    <input id="cy_duration" type="number" matInput formControlName="duration" step="5">
   </mat-form-field>
 
 
@@ -48,7 +49,7 @@
   <!-- Location -->
   <mat-form-field>
     <mat-label>Vælg en lokation</mat-label>
-    <mat-select formControlName="room">
+    <mat-select id="cy_select" formControlName="room">
       <mat-option>Ingen</mat-option>
       <mat-option value="1">Rum 1</mat-option>
       <mat-option value="2">Rum 2</mat-option>
@@ -63,7 +64,7 @@
   <!-- Description -->
   <mat-form-field appearance="fill">
     <mat-label>Beskrivelse</mat-label>
-    <textarea matInput formControlName="description"></textarea>
+    <textarea id="cy_description" matInput formControlName="description"></textarea>
   </mat-form-field>
 
   <button mat-raised-button type="submit">Opdater bookning</button>

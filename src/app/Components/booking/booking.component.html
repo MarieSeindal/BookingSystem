@@ -20,7 +20,7 @@
         matInput id="cy_date" [matDatepicker]="picker"
         formControlName="date">
       <mat-hint>MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker-toggle id="cy_calendarButton" matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
       <mat-error>Venligst vælg en dato</mat-error>
 
@@ -68,7 +68,7 @@
   <!-- Description -->
     <mat-form-field appearance="fill">
     <mat-label>Beskrivelse</mat-label>
-    <textarea matInput formControlName="description"></textarea>
+    <textarea id="cy_description" matInput formControlName="description"></textarea>
   </mat-form-field>
 
     <button mat-raised-button type="submit">Gem bookning</button>
