@@ -172,9 +172,9 @@ export class BookingEditComponent {
   public convertDate(date: Date, time: string, startOrEnd: dateType, duration?: number) {
 
 
-    const formatString = 'yyyy-MM-ddHH:mm:ss';
-    const tempDate = parse(date.toString().replace('T',''),formatString,new Date());
-    date = tempDate;
+    // const formatString = 'yyyy-MM-ddHH:mm:ss';
+    // const tempDate = parse(date.toString().replace('T',''),formatString,new Date());
+    // date = tempDate;
 
     console.log('Dato debug',typeof date);
     if (this._allDay) {
