@@ -2,23 +2,6 @@
 
 <h3> This page is for testing and experimenting while developing</h3>
 
-<!-- Single json object. Lavet som listen nedenunder, da den ikke printer random [] -->
-<div *ngIf="person|async as p">
-  Person
-<!--  <div *ngFor="let a of person|async">-->
-<!--    <pre>-->
-<!--      {{a|json}}-->
-<!--    </pre>-->
-<!--  </div>-->
-
-
-  <!-- Single version shows person, but generates an [] if service fails-->
-  <pre *ngIf="p.length !== 0"> <!-- if service fails, the p has a length of 0 -->
-    {{p|json}}
-  </pre>
-
-</div>
-
 <!-- List json object -->
   <div *ngIf="weather|async as weatherList">
     Random vejr
