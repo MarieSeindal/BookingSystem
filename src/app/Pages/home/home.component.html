@@ -19,11 +19,11 @@
           <th></th>
           <th></th>
         </tr>
-        <tbody *ngFor="let booking of bookingList">
-          <tr>
+        <tbody>
+          <tr *ngFor="let booking of bookingList">
             <td>{{booking.title}}</td>
-            <td>{{booking.startDate}}</td>
-            <td>{{booking.endDate}}</td>
+            <td>{{booking.startDate|date:'short'}}</td>
+            <td>{{booking.endDate|date:'short'}}</td>
             <td>{{booking.description}}</td>
             <td>
               <button

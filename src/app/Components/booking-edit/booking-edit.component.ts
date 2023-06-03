@@ -1,5 +1,4 @@
 import {
-  ChangeDetectorRef,
   Component, EventEmitter,
   Input,
   Output
@@ -62,7 +61,7 @@ export class BookingEditComponent {
 
   formGroup = this._formBuilder.group({
     title: [''],
-    date: ['', Validators.required],
+    date: [new Date(), Validators.required],
     duration: ['', Validators.required],
     time: ['', Validators.required],
     room: ['0', Validators.required],
@@ -80,12 +79,12 @@ export class BookingEditComponent {
     const tempStartDate = parse(booking.startDate.toString().replace('T',''),formatString,new Date());
     const tempEndDate = parse(booking.endDate.toString().replace('T',''),formatString,new Date());
 
-    const timeduration = (tempEndDate.getTime() - tempStartDate.getTime())/(1000*60);
+    const timeduration = (booking.endDate.getTime() - booking.startDate.getTime())/(1000*60);
 
     this.formGroup.controls['title'].setValue(booking.title);
-    this.formGroup.controls['date'].setValue(booking.startDate.toString());
+    this.formGroup.controls['date'].setValue(booking.startDate);
     this.formGroup.controls['duration'].setValue(timeduration.toString());
-    this.formGroup.controls['time'].setValue(this.makeTimeString(tempStartDate));
+    this.formGroup.controls['time'].setValue(this.makeTimeString(booking.startDate));
     this.formGroup.controls['room'].setValue(booking.roomId.toString());
     this.formGroup.controls['description'].setValue(booking.description);
     this.formGroup.controls['allDay'].setValue(booking.allDay);
@@ -132,7 +131,7 @@ export class BookingEditComponent {
 
     const temp: any = 'temp';
 
-    console.log('TEST:',formGroup.controls['date'].value, formGroup.controls['time'].value);
+    console.log('TEST:',formGroup.controls['date'].value, typeof formGroup.controls['date'].value);
 
     const userID: any = sessionStorage.getItem('user') ?? 'ERROR in userID';
 
@@ -171,10 +170,11 @@ export class BookingEditComponent {
 
   public convertDate(date: Date, time: string, startOrEnd: dateType, duration?: number) {
 
-
-    // const formatString = 'yyyy-MM-ddHH:mm:ss';
-    // const tempDate = parse(date.toString().replace('T',''),formatString,new Date());
-    // date = tempDate;
+    // if(typeof (date as Date)){
+    //   const formatString = 'yyyy-MM-ddHH:mm:ss';
+    //   const tempDate = parse(date.toString().replace('T',''),formatString,new Date());
+    //   date = tempDate;
+    // }
 
     console.log('Dato debug',typeof date);
     if (this._allDay) {

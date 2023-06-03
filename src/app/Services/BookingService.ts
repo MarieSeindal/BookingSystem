@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import {Observable, of} from 'rxjs';
+import {map, Observable, of, tap} from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import {ServiceConnectionError} from '../ErrorHandling/ServiceConnectionError';
 import {Booking} from '../Components/booking/booking';
@@ -37,10 +37,21 @@ export class BookingService {
       )
   }
 
-  getBookings(userId: string): Observable<Booking[]> {
+  getBookings(userId: string): Observable<Booking[]> { // Converter datoerString til datoer
     const url = 'https://localhost:7041/booking/'+userId;
     return this.http.get<Booking[]>(url) //
       .pipe(
+        map(result => result.map( booking => ({
+          id: booking.id,
+          userId: booking.userId,
+          title: booking.title,
+          startDate: stringToDate(booking.startDate as unknown as string),
+          endDate: stringToDate(booking.endDate as unknown as string),
+          roomId: booking.roomId,
+          description: booking.description,
+          allDay: booking.allDay
+        }))),
+        tap(a => console.log(a)),
         catchError(this.error.handleError<Booking[]>('deleteBookings',[]))
       )
   }
@@ -63,4 +74,8 @@ export class BookingService {
   }
 
 
+}
+
+function stringToDate(date : string): Date {
+  return new Date(date);
 }

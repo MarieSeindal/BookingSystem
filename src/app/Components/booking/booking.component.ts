@@ -67,12 +67,15 @@ export class BookingComponent {
     private toast: ToastrService,
     public bookingService: BookingService,
   ){
-    this.dateAdapter.setLocale('da');
+    // this.dateAdapter.setLocale('da'); //Should be smart, but it messes with the date picker input
   }
 
   public submitBooking(formGroup: FormGroup){
 
     const temp: any = 'temp';
+
+    console.log('TEST:',formGroup.controls['date'].value, typeof formGroup.controls['date'].value);
+
 
     console.log('ALLDAY:',formGroup.controls['allDay'].value, formGroup.controls['time'].value);
 
