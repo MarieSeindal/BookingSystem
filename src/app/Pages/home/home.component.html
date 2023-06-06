@@ -22,8 +22,10 @@
         <tbody>
           <tr *ngFor="let booking of bookingList">
             <td>{{booking.title}}</td>
-            <td>{{booking.startDate|date:'short'}}</td>
-            <td>{{booking.endDate|date:'short'}}</td>
+            <td *ngIf="booking.allDay">{{booking.startDate|date}}</td>
+            <td *ngIf="!booking.allDay">{{booking.startDate|date:'short'}}</td>
+            <td *ngIf="booking.allDay">{{booking.endDate|date}}</td>
+            <td *ngIf="!booking.allDay">{{booking.endDate|date:'short'}}</td>
             <td>{{booking.description}}</td>
             <td>
               <button
