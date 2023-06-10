@@ -1,0 +1,120 @@
+{
+	"info": {
+		"_postman_id": "2dc632c7-e410-4117-9176-409b21b413f2",
+		"name": "Project",
+		"description": "En samling af HTTP kald til Diplomprojekt for S185363",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "25787882"
+	},
+	"item": [
+		{
+			"name": "User Service",
+			"item": [
+				{
+					"name": "NewUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"NotNeededItWillBeOverWrittenInService\",\r\n    \"firstName\": \"John\",\r\n    \"lastName\": \"Doe\",\r\n    \"password\": \"p-word\",\r\n    \"isAdmin\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://localhost:7041/user",
+						"description": "Denne POST-request opretter en ny bruger med indholdet af det bruger object der sendes med i body. Brugerens id er dog kun stedholder, da servicen gerener et unit id til brugere."
+					},
+					"response": []
+				},
+				{
+					"name": "AllUsers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://localhost:7041/user",
+						"description": "Denne GET-request returnerer en liste af alle user-objekter."
+					},
+					"response": []
+				},
+				{
+					"name": "UserPermission",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://localhost:7041/user/permission/Postman",
+						"description": "Denne GET-request returnerer **true** eller **false** afhængig af om det givne bruger id tilhører en bruger med admin adgang. Er brugere admin returnerers der **true**."
+					},
+					"response": []
+				}
+			],
+			"description": "Denne mappe indehodler alle HTTP-request der laves i direkte forbindelse med en bruger."
+		},
+		{
+			"name": "Booking Service",
+			"item": [
+				{
+					"name": "Booking",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\r\n    \"id\": \"NotNeededItWillBeOverWrittenInService\",\r\n    \"userId\": \"Postman\",\r\n    \"title\": \"Title of Postman booking\",\r\n    \"startDate\": \"2023-06-02T12:00:39.00\",\r\n    \"endDate\": \"2023-06-02T12:30:39.00\",\r\n    \"allDay\": true,\r\n    \"roomId\": 3,\r\n    \"description\": \"Test booking creation from Postman\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://localhost:7041/booking/Postman",
+						"description": "Denne POST-request opretter en bookning på brugere med id 'Postman'."
+					},
+					"response": []
+				},
+				{
+					"name": "Booking",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://localhost:7041/booking/Postman",
+						"description": "Denne GET-request returnere en liste med de booknnger der tilhøre brugeren med id 'Postman'"
+					},
+					"response": []
+				},
+				{
+					"name": "Booking",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\r\n    \"id\": \"PostmanPutTest\",\r\n    \"userId\": \"NotNeeded\",\r\n    \"title\": \"Title of Postman booking\",\r\n    \"startDate\": \"2023-06-02T12:00:39.00\",\r\n    \"endDate\": \"2023-06-02T12:30:39.00\",\r\n    \"allDay\": false,\r\n    \"roomId\": 5,\r\n    \"description\": \"Test booking edit from Postman\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://localhost:7041/booking/PostmanPutTest",
+						"description": "Denne PUT-Request opdatere en given bookning med id 'PostmanPutTest'. Det forudsættes at denne bookning allerede eksistere i systemet."
+					},
+					"response": []
+				},
+				{
+					"name": "Booking",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "https://localhost:7041/booking/PostmanBooking",
+						"description": "Denne DELETE-Request sletter en given bookning med id 'PostmanPutTest'. Det forudsættes at denne bookning allerede eksistere i systemet."
+					},
+					"response": []
+				}
+			],
+			"description": "Denne mappe indehodler alle HTTP-request der laves i direkte forbindelse med en bookning."
+		}
+	]
+}
