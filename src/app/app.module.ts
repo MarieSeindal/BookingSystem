@@ -2,8 +2,6 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
-import {WeatherTestComponent} from './Components/weather-test/weather-test.component';
-import {NgTutorial} from "./Pages/ng-tutorial/ng-tutorial";
 import {RouterModule, RouterOutlet} from "@angular/router";
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {DocumentationComponent} from './Pages/documentation/documentation.component';
@@ -34,7 +32,6 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    NgTutorial,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +44,6 @@ export function tokenGetter() {
     MatNativeDateModule,
     MatInputModule,
     MatFormFieldModule,
-    WeatherTestComponent,
     RouterOutlet,
     RouterModule.forRoot([ //most specific routes on top
       {path: '', redirectTo: 'login', pathMatch: 'full'}, //
@@ -57,8 +53,6 @@ export function tokenGetter() {
           {path: '', redirectTo: 'home', pathMatch: 'full'},
           {path: 'calendar', component: CalendarPageComponent},
           {path: 'booking', component: BookingPageComponent},
-          {path: 'weather', component: WeatherTestComponent},
-          {path: 'ng-tutorial', component: NgTutorial},
           {path: 'documentation', component: DocumentationComponent},
           {path: 'user', component: AddPersonPageComponent},
           {path: 'user/:userId', component: ShowPersonComponent}, // https://stackblitz.com/github/rangle/angular-book-examples/tree/feat-programmatic-route-navigation?file=src%2Fapp%2Fapp.component.html
